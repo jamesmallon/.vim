@@ -54,7 +54,7 @@ wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profil
 mkdir /opt/vim/profile/colors
 cd /opt/vim/profile/colors
 wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/mallon.vim
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/greenwint.vim
+wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/tundra.vim
 wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/mallonkai.vim
 
 # get back to autoload folder
