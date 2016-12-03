@@ -1,10 +1,8 @@
   " set nocompatible
   
-  "color peachpuff
-  "color pablo
-  "color slate 
-  "colorscheme mallonkai
+  "colorscheme kai
   "colorscheme mallon 
+  "colorscheme tundra 
   colorscheme nordic
   set number " displays line number
   set incsearch " vim highlights you string search as you're typing it
