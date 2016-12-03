@@ -22,6 +22,7 @@ set smarttab
 set linebreak
 set et
 set title
+set noswapfile
 "set spell
 
 set mouse=v
