@@ -17,7 +17,8 @@ let colors_name = "mallon"
 :hi IncSearch guifg=green guibg=black cterm=none ctermfg=yellow ctermbg=green
 :hi ModeMsg guifg=goldenrod cterm=none ctermfg=brown
 :hi MoreMsg guifg=SeaGreen ctermfg=darkgreen
-:hi NonText guifg=RoyalBlue guibg=grey15 cterm=bold ctermfg=blue
+"color to fill non written area
+:hi NonText cterm=NONE ctermbg=black ctermfg=black gui=NONE guibg=black guifg=black
 :hi EndOfBuffer ctermfg=black ctermbg=none
 :hi Question guifg=springgreen ctermfg=green
 :hi Search guibg=peru guifg=wheat cterm=none ctermfg=grey ctermbg=blue
