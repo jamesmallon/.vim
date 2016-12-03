@@ -3,12 +3,17 @@
 :set background=dark
 :highlight clear
 if version > 580
- hi clear
- if exists("syntax_on")
- syntax reset
- endif
+hi clear
+if exists("syntax_on")
+syntax reset
+endif
 endif
 let colors_name = "mallon"
+
+set colorcolumn=90 "set a right border to serv as a sign to the line max length"
+"%left 2 "padding between line number and text
+set nuw=4 "padding between nerdtree border and line number      
+
 :hi Normal guifg=White guibg=grey15
 :hi Cursor guibg=khaki guifg=slategrey
 :hi VertSplit ctermfg=241 ctermbg=241 cterm=NONE guifg=#64645e guibg=#64645e gui=NONE
@@ -41,7 +46,8 @@ let colors_name = "mallon"
 :hi Type guifg=CornflowerBlue ctermfg=2
 :hi Function guifg=navajowhite ctermfg=brown
 :hi Structure guifg=green ctermfg=green
-:hi LineNr guifg=grey50 ctermfg=3
+":hi LineNr guifg=grey50 ctermfg=3
+:hi LineNr ctermfg=102 ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE 
 :hi Ignore guifg=grey40 cterm=bold ctermfg=7
 :hi Todo guifg=orangered guibg=yellow2
 :hi Directory ctermfg=darkcyan
