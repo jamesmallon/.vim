@@ -60,8 +60,8 @@
   let NERDTreeShowHidden=1 " Config to show hidden file and folders
   
   "let NERDTreeChDirMode=2 " Config to refresh directories
-  let g:NERDTreeDirArrowExpandable = ''
-  let g:NERDTreeDirArrowCollapsible = ''
+  let g:NERDTreeDirArrowExpandable = '+'
+  let g:NERDTreeDirArrowCollapsible = '~'
   
   " maps nerdtree toggle function to F6 key
   nmap <F6> :NERDTreeToggle<CR> 
