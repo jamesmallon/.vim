@@ -10,7 +10,7 @@ endif
 endif
 let colors_name = "mallon"
 
-set colorcolumn=90 "set a right border to serv as a sign to the line max length"
+"set colorcolumn=90 "set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 set nuw=4 "padding between nerdtree border and line number      
 
@@ -20,7 +20,7 @@ set nuw=4 "padding between nerdtree border and line number
 :hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=darkgrey
 :hi FoldColumn guibg=black guifg=grey20 ctermfg=4 ctermbg=7
 :hi IncSearch guifg=green guibg=black cterm=none ctermfg=yellow ctermbg=green
-:hi ModeMsg guifg=goldenrod cterm=none ctermfg=brown
+":hi ModeMsg guifg=goldenrod cterm=none ctermfg=brown
 :hi MoreMsg guifg=SeaGreen ctermfg=darkgreen
 "color to fill non written area
 :hi NonText cterm=NONE ctermbg=black ctermfg=black gui=NONE guibg=black guifg=black
@@ -32,9 +32,10 @@ set nuw=4 "padding between nerdtree border and line number
 :hi StatusLineNC ctermfg=231 ctermbg=241 cterm=NONE guifg=#f8f8f2 guibg=#64645e gui=NONE
 :hi Title guifg=gold gui=bold cterm=bold ctermfg=yellow
 :hi Statement guifg=CornflowerBlue ctermfg=lightblue
+":hi Statement guifg=CornflowerBlue ctermfg=blue
 :hi Visual gui=none guifg=khaki guibg=olivedrab cterm=reverse
 :hi WarningMsg guifg=salmon ctermfg=1
-:hi String guifg=SkyBlue ctermfg=darkcyan
+:hi String guifg=SkyBlue ctermfg=cyan
 :hi Comment ctermfg=242 ctermbg=NONE cterm=NONE guifg=#75715e guibg=NONE gui=NONE
 :hi Constant guifg=#ffa0a0 ctermfg=brown
 :hi Special guifg=darkkhaki ctermfg=brown
@@ -50,7 +51,7 @@ set nuw=4 "padding between nerdtree border and line number
 :hi LineNr ctermfg=102 ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE 
 :hi Ignore guifg=grey40 cterm=bold ctermfg=7
 :hi Todo guifg=orangered guibg=yellow2
-:hi Directory ctermfg=darkcyan
+:hi Directory ctermfg=cyan
 :hi ErrorMsg cterm=bold guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 :hi VisualNOS cterm=bold,underline
 :hi WildMenu ctermfg=0 ctermbg=3

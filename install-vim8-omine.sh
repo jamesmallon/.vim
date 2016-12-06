@@ -53,10 +53,9 @@ wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profil
 # get the colortheme files
 mkdir /opt/vim/profile/colors
 cd /opt/vim/profile/colors
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/nordic.vim
 wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/mallon.vim
 wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/tundra.vim
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/kai.vim
+wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Yum/profile/colors/mallonkai.vim
 
 # get back to autoload folder
 mkdir /opt/vim/profile/autoload
