@@ -86,4 +86,4 @@ endif
 endfor
 echo "Closed ".closed." hidden buffers"
 endfunction
-"noremap <silent> H :call DelHddBuffers()<cr>
+
