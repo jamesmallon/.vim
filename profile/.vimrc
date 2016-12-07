@@ -13,8 +13,8 @@ set showcmd " displays incomplete commands
 set wildmenu " displays vim complete suggestions for system functions
 set scrolloff=5 " sets the lines remaining on top when using z command
 set hlsearch " highlights your searching matches
-set ignorecase " disables case sensitive string searches (good to use with smartcase)
-set smartcase " vim use case sensitive string searches if it detects any uppercase character
+"set ignorecase " disables case sensitive string searches (good to use with smartcase)
+"set smartcase " vim use case sensitive string searches if it detects any uppercase character
 set nobackup " disables backup files - vim will not create a copy of the file you're editing before you save it
 set autowrite
 set smarttab
