@@ -88,6 +88,6 @@ function! DeleteHiddenBuffers()
 endfunction
 
 " 
-function! ReleaseTmpFolder(tempFolder)
-    execute '!sudo /opt/vim/profile/vim-release-tmp.sh ' . a:tempFolder
+function! ReleaseTmpFolder(tempFolder, user)
+    execute '!sudo /opt/vim/profile/vim-release-tmp.sh ' . a:tempFolder a:user
 endfunction
