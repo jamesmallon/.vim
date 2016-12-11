@@ -26,7 +26,7 @@ set nuw=4 "padding between nerdtree border and line number
 :hi NonText cterm=NONE ctermbg=black ctermfg=black gui=NONE guibg=black guifg=black
 :hi EndOfBuffer ctermfg=black ctermbg=none
 :hi Question guifg=springgreen ctermfg=green
-:hi Search guibg=peru guifg=wheat cterm=none ctermfg=grey ctermbg=blue
+:hi Search guibg=peru guifg=wheat cterm=none ctermfg=black ctermbg=blue
 :hi SpecialKey guifg=yellowgreen ctermfg=darkgreen
 :hi StatusLine ctermfg=231 ctermbg=241 cterm=bold guifg=#f8f8f2 guibg=#64645e gui=bold
 :hi StatusLineNC ctermfg=231 ctermbg=241 cterm=NONE guifg=#f8f8f2 guibg=#64645e gui=NONE
