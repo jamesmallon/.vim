@@ -72,6 +72,8 @@ cd /opt/vim/profile/bundle/
 # install plugins
 git clone https://github.com/fatih/vim-go.git vim-go
 git clone https://github.com/scrooloose/nerdtree.git nerdtree
+git clone https://github.com/vim-php/vim-composer.git vim-composer
+git clone https://github.com/vim-php/vim-phpunit.git vim-phpunit
 
 # install compiled vim as a possible default system text editor
 echo "Do you want to install the compiled vim as a possible system default text editor?"
