@@ -14,12 +14,12 @@ umask 077 /opt/vim
 git clone https://github.com/vim/vim.git /opt/vim
 # checking ou to the right tag
 cd /opt/vim
-git checkout tags/v8.0.1365
+git checkout tags/v8.0.1428
 
 cd /opt/vim/src
 
-sudo apt groupinstall "Development tools" -y
-sudo apt install ncurses ncurses-devel wget git -y
+sudo apt install -y build-essential
+sudo apt-get install libncurses5-dev libncursesw5-dev 
 # configure before make
 #./configure --with-features=huge --enable-gui=auto 
 ./configure --with-features=huge --enable-gui=auto --enable-pythoninterp
@@ -62,6 +62,9 @@ wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profil
 mkdir /opt/vim/profile/autoload
 cd /opt/vim/profile/autoload/
 
+# ensuring cURL installation
+sudo apt install curl
+
 # dowload pathogeni
 curl -LSso /opt/vim/profile/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
@@ -74,10 +77,11 @@ git clone https://github.com/fatih/vim-go.git vim-go
 git clone https://github.com/scrooloose/nerdtree.git nerdtree
 git clone https://github.com/vim-php/vim-composer.git vim-composer
 git clone https://github.com/vim-php/vim-phpunit.git vim-phpunit
+git clone https://github.com/moll/vim-node.git node
 
 # install compiled vim as a possible default system text editor
 echo "Do you want to install the compiled vim as a possible system default text editor?"
-sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim
+sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1000
 
 # ask for set compiled vim as the system default text editor
 echo "Select the system default text editor:"
