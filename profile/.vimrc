@@ -91,3 +91,6 @@ endfunction
 function! ReleaseTmpFolder(tempFolder, user)
     execute '!sudo /opt/vim/profile/vim-release-tmp.sh ' . a:tempFolder a:user
 endfunction
+
+" Change the default snipmate trigger key to <tab>
+:imap <tab> <Plug>snipMateTrigger 
