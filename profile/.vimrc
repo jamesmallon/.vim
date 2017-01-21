@@ -93,4 +93,5 @@ function! ReleaseTmpFolder(tempFolder, user)
 endfunction
 
 " Change the default snipmate trigger key to <tab>
-:imap <tab> <Plug>snipMateTrigger 
+:imap <C-l> <Plug>snipMateTrigger 
+:imap <C-L> <Plug>snipMateNextOrTrigger
