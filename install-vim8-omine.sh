@@ -43,20 +43,25 @@ sudo make install
 make clean
 make distclean
 
+
+cd /opt/vim/
+sudo apt install subversioni
+svn export https://github.com/johnthegreenobrien/Vim-8-OMine/branches/Apt/profile profile
+
 # create profile folder
-mkdir /opt/vim/profile
+#mkdir /opt/vim/profile
 
 # get the .vimrc file
-cd /opt/vim/profile/
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/.vimrc
+#cd /opt/vim/profile/
+#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/.vimrc
 
 # get the colortheme files
-mkdir /opt/vim/profile/colors
-cd /opt/vim/profile/colors
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/nordic.vim
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/mallon.vim
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/tundra.vim
-wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/kai.vim
+#mkdir /opt/vim/profile/colors
+#cd /opt/vim/profile/colors
+#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/nordic.vim
+#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/mallon.vim
+#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/tundra.vim
+#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/kai.vim
 
 # get back to autoload folder
 mkdir /opt/vim/profile/autoload
