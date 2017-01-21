@@ -54,6 +54,9 @@ curl -LSso $vimProf/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 mkdir $vimProf/bundle
 cd $vimProf/bundle/
 
+# ensure globally installation of jshint
+npm install -g jshint
+
 # install plugins
 git clone https://github.com/fatih/vim-go.git vim-go
 git clone https://github.com/scrooloose/nerdtree.git nerdtree
