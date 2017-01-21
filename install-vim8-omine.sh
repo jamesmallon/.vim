@@ -1,22 +1,20 @@
 #!/bin/bash
 
-# creates the directory
-sudo mkdir /opt/vim
-
-# set the permissions
-sudo chown $USER:$USER -R /opt/vim
-chmod go= -R /opt/vim
+vimDir=/opt/vim
+vimProf=/opt/vim/profile
+vimInst=/opt/vim/vim
+vimSrc=$vimInst/src
 
 # set the umask
-umask 077 /opt/vim
+umask 077 $vimDir
 
 # clone the project
-git clone https://github.com/vim/vim.git /opt/vim
+cd $vimInst
+git clone https://github.com/vim/vim.git $vimInst
 # checking ou to the right tag
-cd /opt/vim
 git checkout tags/v8.0.1428
 
-cd /opt/vim/src
+cd $vimSrc 
 
 sudo apt install -y build-essential
 sudo apt-get install libncurses5-dev libncursesw5-dev 
@@ -34,7 +32,7 @@ make
 make check
 
 # configure ~/.vimrc file
-sh -c 'printf "set runtimepath^=/opt/vim/profile\nruntime .vimrc" > /home/'$USER'/.vimrc'
+sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > /home/'$USER'/.vimrc'
 
 # install 
 sudo make install
@@ -43,39 +41,18 @@ sudo make install
 make clean
 make distclean
 
-
-cd /opt/vim/
-sudo apt install subversioni
-svn export https://github.com/johnthegreenobrien/Vim-8-OMine/branches/Apt/profile profile
-
-# create profile folder
-#mkdir /opt/vim/profile
-
-# get the .vimrc file
-#cd /opt/vim/profile/
-#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/.vimrc
-
-# get the colortheme files
-#mkdir /opt/vim/profile/colors
-#cd /opt/vim/profile/colors
-#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/nordic.vim
-#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/mallon.vim
-#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/tundra.vim
-#wget https://raw.githubusercontent.com/johnthegreenobrien/Vim-8-OMine/Apt/profile/colors/kai.vim
-
 # get back to autoload folder
-mkdir /opt/vim/profile/autoload
-cd /opt/vim/profile/autoload/
+mkdir $vimProf/autoload
 
 # ensuring cURL installation
 sudo apt install curl
 
 # dowload pathogeni
-curl -LSso /opt/vim/profile/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+curl -LSso $vimProf/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 # get back to bundle folder
-mkdir /opt/vim/profile/bundle
-cd /opt/vim/profile/bundle/
+mkdir $vimProf/bundle
+cd $vimProf/bundle/
 
 # install plugins
 git clone https://github.com/fatih/vim-go.git vim-go
