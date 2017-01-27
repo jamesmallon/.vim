@@ -12,18 +12,25 @@ snippet nm
 	 */
 	namespace $1
 
+snippet ndoc
+	/**
+	 * @subpackage ${1}
+	 */
+
 snippet cdoc
 	/**
 	 * @author James Mallon <jamesmallondev@gmail.com>
 	 * Class ${1}
 	 */
 
+
 snippet cls
 	/**
 	 * Class ${1:}
 	 * @author James Mallon <jamesmallondev@gmail.com>
 	 */
-	class $1 {
+	class $1 
+	{
 		${2}
 	}
 
@@ -32,7 +39,8 @@ snippet pbfn
 	 * @method ${1:}
 	 * @return ${2}
 	 */
-	 public function $1(${3}) {
+	 public function $1(${3}) 
+	 {
 	 	${4}
 	 }
 
@@ -42,7 +50,8 @@ snippet ptfn
 	 * @method ${1:}
 	 * @return ${2}
 	 */
-	 protected function $1(${3}) {
+	 protected function $1(${3}) 
+	 {
 	 	${4}
 	 }
 
@@ -51,7 +60,8 @@ snippet pvfn
 	 * @method ${1:}
 	 * @return ${2}
 	 */
-	 private function $1(${3}) {
+	 private function $1(${3}) 
+	 {
 	 	${4}
 	 }
 	
