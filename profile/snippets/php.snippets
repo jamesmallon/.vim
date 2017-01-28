@@ -1,74 +1,129 @@
 snippet php
-	/**
-	 * Created by James Mallon <jamesmallondev@gmail.com>
-	 */
 	<?php
-
-	${1}
-
-snippet nm
 	/**
-	 * @subpackage ${1:}
+	 * PHP Version 7
+	 *
+	 * @package ${1}
+	 * @author  James Mallon <jamesmallondev@gmail.com>
+	 * @license MIT https://opensource.org/licenses/MIT
+	 * @link    https://www.linkedin.com/in/james-mallon-25b157135/
 	 */
-	namespace $1
+	${2}
 
+# namespaces
 snippet ndoc
 	/**
+	 * File namespace
+	 *
 	 * @subpackage ${1}
 	 */
 
+snippet nm
+	/**
+	 * File namespace
+	 *
+	 * @subpackage ${1:}
+	 */
+	namespace $1;
+
+# classes
 snippet cdoc
 	/**
-	 * @author James Mallon <jamesmallondev@gmail.com>
 	 * Class ${1}
+	 *
+	 * @package ${2}
+	 * @author  James Mallon <jamesmallondev@gmail.com>
+	 * @license MIT https://opensource.org/licenses/MIT
+	 * @link    https://www.linkedin.com/in/james-mallon-25b157135/
 	 */
-
 
 snippet cls
 	/**
 	 * Class ${1:}
-	 * @author James Mallon <jamesmallondev@gmail.com>
+	 *
+	 * @package ${2}
+	 * @author  James Mallon <jamesmallondev@gmail.com>
+	 * @license MIT https://opensource.org/licenses/MIT
+	 * @link    https://www.linkedin.com/in/james-mallon-25b157135/
 	 */
 	class $1 
 	{
-		${2}
+		${3}
 	}
 
-snippet pbfn
+# methods
+snippet mdoc
 	/**
+	 * Method $1
+	 *
 	 * @method ${1:}
-	 * @return ${2}
-	 */
-	 public function $1(${3}) 
-	 {
-	 	${4}
-	 }
-
-
-snippet ptfn
-	/**
-	 * @method ${1:}
-	 * @return ${2}
-	 */
-	 protected function $1(${3}) 
-	 {
-	 	${4}
-	 }
-
-snippet pvfn
-	/**
-	 * @method ${1:}
-	 * @return ${2}
-	 */
-	 private function $1(${3}) 
-	 {
-	 	${4}
-	 }
-	
-snippet fdoc
-	/**
-	 * @method ${1}
 	 * @return ${1}
 	 */
 
+snippet pbm
+	/**
+	 * Public method $1
+	 *
+	 * @method ${1:}
+	 * @return ${2}
+	 */
+	public function $1(${3})
+	{
+		${4}
+	}
+
+snippet pdm
+	/**
+	 * Protected method $1
+	 *
+	 * @method ${1:}
+	 * @return ${2}
+	 */
+	protected function $1(${3})
+	{
+		${4}
+	}
+
+snippet pvm
+	/**
+	 * Private method $1
+	 *
+	 * @method ${1:}
+	 * @return ${2}
+	 */
+	private function $1(${3})
+	{
+		${4}
+	}
+
+# properties
+snippet pdoc
+	/**
+	 * Property $2
+	 *
+	 * @var ${1} ${2:} ${3}
+	 */
 	
+snippet pbp
+	/**
+	 * Public property $2
+	 *
+	 * @var ${1} ${2:} ${3}
+	 */
+	public $2;
+	
+snippet pdp
+	/**
+	 * Protected property $2
+	 *
+	 * @var ${1} ${2:} ${3}
+	 */
+	protected $2;
+	
+snippet pvp
+	/**
+	 * Private property $2
+	 *
+	 * @var ${1} ${2:} ${3}
+	 */
+	private $2;

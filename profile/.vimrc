@@ -23,6 +23,8 @@ set et
 set title
 set noswapfile
 "set spell
+set autoread " enable file auto refresh
+au CursorHold * checktime
 set mouse=a " enable mouse wheel scrolling
 
 "set colorcolumn=90 "set a right border to serv as a sign to the line max length"
@@ -93,5 +95,5 @@ function! ReleaseTmpFolder(tempFolder, user)
 endfunction
 
 " Change the default snipmate trigger key to <tab>
-:imap <C-l> <Plug>snipMateTrigger 
-:imap <C-L> <Plug>snipMateNextOrTrigger
+" :imap <C-l> <Plug>snipMateTrigger 
+:imap <tab> <Plug>snipMateNextOrTrigger
