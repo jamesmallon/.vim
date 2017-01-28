@@ -25,6 +25,7 @@ set noswapfile
 "set spell
 set autoread " enable file auto refresh
 au CursorHold * checktime
+"autocmd BufWrite *.php :! phpcbf % 
 set mouse=a " enable mouse wheel scrolling
 
 "set colorcolumn=90 "set a right border to serv as a sign to the line max length"
@@ -89,9 +90,14 @@ function! DeleteHiddenBuffers()
     echo "Closed ".closed." hidden buffers"
 endfunction
 
-" 
+" workaround for Fedora's bug
 function! ReleaseTmpFolder(tempFolder, user)
     execute '!sudo /opt/vim/profile/vim-release-tmp.sh ' . a:tempFolder a:user
+endfunction
+
+" workaround for Fedora's bug
+function! PHPFixer()
+    execute '!phpcbf %'
 endfunction
 
 " Change the default snipmate trigger key to <tab>
