@@ -8,17 +8,15 @@
 # installed plugins
 - pathogen
 - nerdtree
-## go
 - vim-go
-## php
 - vim-composer
 - vim-phpunit
-## snipmate
 - tlib_vim
 - vim-addon-mw-utils
 - vim-snipmate
-## node & js
 - vim-node
 - vim-javascript-syntax
 - snipmate-nodejs
 - jshint
+
+Have fun!
