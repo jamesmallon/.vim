@@ -1,7 +1,5 @@
-# Customized compiled Vim for Debian distros
-It has customized color themes, snippets and .vimrc file. The goal is get a development based Vim version esiear and faster by using a compiled version and a bash file to make it ready in minutes. 
-
-The customizations will be found in color themes, snippets and .vimrc file - all for development in PHP, Golang and Javascriptl
+# Customized compiled Vim v8.0.1428 for Debian distros
+It has customized color themes, snippets and .vimrc file. The goal is to setting up easier and faster a development based Vim version by using a compiled version and all customization that works for me.
 
 # Installation
 
