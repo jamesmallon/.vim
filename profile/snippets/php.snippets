@@ -144,15 +144,15 @@ snippet mdoc
 	/**
 	 * Method $2 - $3.${5}
 	 *
-	 * @method ${1} ${2:} ${3:}
-	 * @return ${4}
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1
 	 */
 snippet pbm
 	/**
 	 * Public method $2 - $3.${6}
 	 *
-	 * @method ${1} ${2:} ${3:}
-	 * @return ${4}
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1
 	 */
 	public function $2(${5})${7:}
 	{
@@ -162,8 +162,8 @@ snippet pdm
 	/**
 	 * Protected method $2 - $3.${6}
 	 *
-	 * @method ${1} ${2:} ${3:}
-	 * @return ${4}
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1
 	 */
 	protected function $2(${5})${7:}
 	{
@@ -173,8 +173,8 @@ snippet pvm
 	/**
 	 * Private method $2 - $3 ${6}
 	 *
-	 * @method ${1} ${2:} ${3:}
-	 * @return ${4}
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1
 	 */
 	private function $2(${5})${7:}
 	{
@@ -242,3 +242,11 @@ snippet whl
 	while (${1}) {
 		${2}
 	}
+
+# SYMFONY 2
+snippet syro
+	${1}:
+		path: ${2}
+		defaults: { _controller: "${3}" }
+		requirements: { ${4} }
+
