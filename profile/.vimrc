@@ -28,7 +28,7 @@ au CursorHold * checktime
 "autocmd BufWrite *.php :! phpcbf % 
 set mouse=a " enable mouse wheel scrolling
 
-"set colorcolumn=90 "set a right border to serv as a sign to the line max length"
+set colorcolumn=85 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 set nuw=4 "padding between nerdtree border and line number 
 set mouse=v
@@ -55,6 +55,9 @@ set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L" " displays
 set fileencodings=utf-8 " sets the file charset
 set encoding=utf8
 set guifont=DroidSansMono\ Nerd\ Font\ 11
+
+" snipmate configurations
+"set ft=yml " snippets can be used in yml files
 
 execute pathogen#infect()
 
