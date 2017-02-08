@@ -26,12 +26,11 @@ set noswapfile
 set autoread " enable file auto refresh
 au CursorHold * checktime
 "autocmd BufWrite *.php :! phpcbf % 
-set mouse=a " enable mouse wheel scrolling
 
 set colorcolumn=85 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 set nuw=4 "padding between nerdtree border and line number 
-set mouse=v
+set mouse=a "enable mouse wheel scrolling
 set history=5 " keep the last 5 commands in memory
 set tabstop=4
 set matchtime=2
@@ -99,8 +98,13 @@ function! ReleaseTmpFolder(tempFolder, user)
 endfunction
 
 " workaround for Fedora's bug
-function! PHPFixer()
-    execute '!phpcbf %'
+"function! PHPFix()
+"    execute '!clear'
+"    execute '!phpcbf %'
+"    execute '!phpcs %'
+"endfunction
+function! PHPFix()
+    execute '!clear; phpcbf %; phpcs %'
 endfunction
 
 " Change the default snipmate trigger key to <tab>
