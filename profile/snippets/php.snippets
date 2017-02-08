@@ -139,6 +139,57 @@ snippet cls
 	{
 		${4}
 	}
+# entities
+snippet ecdoc
+	/**
+	 * Class ${1}
+	 *
+	 * @category ${2}
+	 * @package ${3}
+	 * @author  James Mallon <jamesmallondev@gmail.com>
+	 * @license MIT https://opensource.org/licenses/MIT
+	 * @link    https://www.linkedin.com/in/james-mallon-25b157135/
+	 *
+	 * @ORM\Entity
+	 * @ORM\Table(name="${4}")
+	 */
+snippet ecls
+	/**
+	 * Class ${1:}
+	 *
+	 * @category ${2}
+	 * @package ${3}
+	 * @author  James Mallon <jamesmallondev@gmail.com>
+	 * @license MIT https://opensource.org/licenses/MIT
+	 * @link    https://www.linkedin.com/in/james-mallon-25b157135/
+	 *
+	 * @ORM\Entity
+	 * @ORM\Table(name="${4}")
+	 */
+	class $1
+	{
+		${5}
+	}
+snippet epid
+	/**
+	 * Protected property $2 - $3
+	 *
+	 * @var ${1} ${2:} ${3:}
+	 *
+	 * @ORM\Column(type="integer")
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $2;
+snippet ep
+	/**
+	 * Protected property $2 - $3
+	 *
+	 * @var ${1} ${2:} ${3:}
+	 *
+	 * @ORM\Column(type="${4}")
+	 */
+	protected $2;
 # methods
 snippet mdoc
 	/**
