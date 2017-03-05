@@ -32,7 +32,7 @@ make
 make check
 
 # configure ~/.vimrc file
-sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > /home/'$USER'/.vimrc'
+sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
 # install 
 sudo make install
@@ -40,9 +40,6 @@ sudo make install
 # clean files created by make
 make clean
 make distclean
-
-# get back to autoload folder
-mkdir $vimProf/autoload
 
 # ensuring cURL installation
 sudo apt install curl

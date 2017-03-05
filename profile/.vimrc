@@ -30,7 +30,8 @@ au CursorHold * checktime
 set colorcolumn=85 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 set nuw=4 "padding between nerdtree border and line number 
-set mouse=a "enable mouse wheel scrolling
+"set mouse=a "enable mouse wheel scrolling
+set mouse=c "enable mouse selectin
 set history=5 " keep the last 5 commands in memory
 set tabstop=4
 set matchtime=2
