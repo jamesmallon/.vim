@@ -44,6 +44,9 @@ make distclean
 # ensuring cURL installation
 sudo apt install curl
 
+# get back to autoload folder
+mkdir $vimProf/autoload
+
 # dowload pathogeni
 curl -LSso $vimProf/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
