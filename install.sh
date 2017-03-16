@@ -1,45 +1,12 @@
 #!/bin/bash
 
-vimDir=/opt/vim
-vimProf=/opt/vim/profile
-vimInst=/opt/vim/vim
+vimDir=~/vim
+vimProf=~/vim/profile
+vimInst=~/vim/vim
 vimSrc=$vimInst/src
-
-# set the umask
-umask 077 $vimDir
-
-# clone the project
-cd $vimInst
-git clone https://github.com/vim/vim.git $vimInst
-# checking ou to the right tag
-git checkout tags/v8.0.1428
-
-cd $vimSrc 
-
-sudo apt install -y build-essential
-sudo apt-get install libncurses5-dev libncursesw5-dev 
-# configure before make
-#./configure --with-features=huge --enable-gui=auto 
-./configure --with-features=huge --enable-gui=auto --enable-pythoninterp
-#./configure --with-features=huge --enable-gui=auto --enable-python3interp
-
-# install necessary lib
-
-# make it
-make
-
-# check the make result
-make check
 
 # configure ~/.vimrc file
 sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
-
-# install 
-sudo make install
-
-# clean files created by make
-make clean
-make distclean
 
 # ensuring cURL installation
 sudo apt install curl
