@@ -1,9 +1,8 @@
 #!/bin/bash
 
-vimDir=~/vim
-vimProf=~/vim/profile
-vimInst=~/vim/vim
-vimSrc=$vimInst/src
+vimProf="~/vim/profile"
+vimBndl=~/vim/profile/bundle
+vimAuto=~/vim/profile/autoload
 
 # configure ~/.vimrc file
 sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
@@ -12,14 +11,14 @@ sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 sudo apt install curl
 
 # get back to autoload folder
-mkdir $vimProf/autoload
+mkdir $vimAuto
 
 # dowload pathogeni
-curl -LSso $vimProf/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+curl -LSso $vimAuto/pathogen.vim https://tpo.pe/pathogen.vim
 
 # get back to bundle folder
-mkdir $vimProf/bundle
-cd $vimProf/bundle/
+mkdir $vimBndl 
+cd $vimBndl
 
 # ensure globally installation of jshint
 npm install -g jshint
