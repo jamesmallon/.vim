@@ -1,4 +1,4 @@
-# Fast setup for Vim - Ubuntu 16.04
+# Fast setup for Vim (no install) - Ubuntu 16.04
 It has customized color themes, snippets and .vimrc file. The goal is to setting up easier and faster a development based Vim version by using a compiled version and all customization that works for me.
 
 # Installation
