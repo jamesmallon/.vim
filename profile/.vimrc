@@ -22,6 +22,7 @@ set linebreak
 set et
 set title
 set noswapfile
+"set backupdir=backups/
 "set spell
 set autoread " enable file auto refresh
 au CursorHold * checktime
@@ -93,9 +94,10 @@ function! DeleteHiddenBuffers()
     echo "Closed ".closed." hidden buffers"
 endfunction
 
-" workaround for Fedora's bug
+" workaround for vim-go bug
 function! ReleaseTmpFolder(tempFolder, user)
-    execute '!sudo /opt/vim/profile/vim-release-tmp.sh ' . a:tempFolder a:user
+    execute '!mkdir /tmp/'.a:tempFolder
+    execute '!chown '.a:user..':'.a:user.' /tmp/'.a:tempFolder
 endfunction
 
 " workaround for Fedora's bug
