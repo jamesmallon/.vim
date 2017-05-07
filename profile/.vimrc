@@ -97,7 +97,7 @@ endfunction
 " workaround for vim-go bug
 function! ReleaseTmpFolder(tempFolder, user)
     execute '!mkdir /tmp/'.a:tempFolder
-    execute '!chown '.a:user..':'.a:user.' /tmp/'.a:tempFolder
+    execute '!chown '.a:user.':'.a:user.' /tmp/'.a:tempFolder
 endfunction
 
 " workaround for Fedora's bug
