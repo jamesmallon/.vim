@@ -3,9 +3,11 @@ It has customized color themes, snippets and .vimrc file. The goal is to setting
 
 # Installation
 
-- apt install vim
-- create the folder ~/vim 
-- run the install.sh file - ./install.sh
+```ssh
+$ apt install vim
+$ mkdir ~/vim 
+$ ./install.sh
+```
 
 # installed plugins
 - pathogen
