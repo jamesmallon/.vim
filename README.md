@@ -3,9 +3,10 @@ It has customized color themes, snippets and .vimrc file. The goal is to setting
 
 # Installation
 
-```ssh
+```sh
 $ apt install vim
 $ mkdir ~/vim 
+$ cd ~/vim
 $ ./install.sh
 ```
 
