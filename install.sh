@@ -6,7 +6,7 @@ vimAuto=~/vim/profile/autoload
 
 # ensuring vim installation
 if [ -z "$(which vim)" ]; then
-    printf "\n"'\e[36m'"Oops "'\e[33m'"vim "'\e[36m'" is not installed.\nIt is necessary to have it installed first.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
+    printf "\n"'\e[36m'"Oops "'\e[33m'"vim "'\e[36m'" is not installed.\nIt is necessary to have it installed first.\n - We will just add some plugins and add some configs and functions to your .vimrc\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
 
     read resp
 
