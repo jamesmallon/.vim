@@ -4,11 +4,36 @@ vimProf="~/vim/profile"
 vimBndl=~/vim/profile/bundle
 vimAuto=~/vim/profile/autoload
 
+# ensuring vim installation
+if [ -z "$(which vim)" ]; then
+    printf "\n"'\e[36m'"Oops "'\e[33m'"vim "'\e[36m'" is not installed.\nIt is necessary to have it installed first.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
+
+    read resp
+
+    if [ -z "$resp" ]; then
+        sudo apt install vim
+    else
+        printf '\e[36m'"Ok, install vim and run this script again."'\e[0m'"\n"
+        exit 1
+    fi
+fi
+
 # configure ~/.vimrc file
 sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
 # ensuring cURL installation
-sudo apt install curl
+if [ -z "$(which curl)" ]; then
+    printf "\n"'\e[36m'"Hey! You don't have "'\e[33m'"curl "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
+
+    read resp
+
+    if [ -z "$resp" ]; then
+        sudo apt install curl
+    else
+        printf '\e[36m'"Ok, install curl and run this script again."'\e[0m'"\n"
+        exit 1
+    fi
+fi
 
 # get back to autoload folder
 mkdir $vimAuto
@@ -21,7 +46,19 @@ mkdir $vimBndl
 cd $vimBndl
 
 # ensure globally installation of jshint
-npm install -g jshint
+if [ -z "$(which npm)" ]; then
+    printf "\n"'\e[36m'"Hmm I've checked that you don't have "'\e[33m'"npm "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want to install it now? [Y/n]"'\e[0m'"\n"
+
+    read resp
+
+    if [ -z "$resp" ]; then
+        sudo apt install npm
+        npm install -g jshint
+    else
+        printf '\e[36m'"Ok, install npm and run this script again."'\e[0m'"\n"
+        exit 1
+    fi
+fi
 
 # install plugins
 git clone https://github.com/fatih/vim-go.git 
@@ -41,10 +78,6 @@ git clone https://github.com/jelera/vim-javascript-syntax.git
 git clone https://github.com/jamescarr/snipmate-nodejs.git 
 git clone https://github.com/walm/jshint.vim 
 
-# install compiled vim as a possible default system text editor
-echo "Do you want to install the compiled vim as a possible system default text editor?"
-sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/vim 1000
-
 # ask for set compiled vim as the system default text editor
-echo "Select the system default text editor:"
+printf '\e[36m'"Select the system default text editor:\n"'\e[0m'
 sudo update-alternatives --config editor
