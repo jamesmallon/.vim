@@ -68,6 +68,8 @@ git clone https://github.com/vim-php/vim-composer.git
 git clone https://github.com/vim-php/vim-phpunit.git 
 # symfony
 git clone https://github.com/beyondwords/vim-twig.git 
+# laravel
+git clone git://github.com/jwalton512/vim-blade.git
 # snipmate
 git clone https://github.com/tomtom/tlib_vim.git 
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git 
