@@ -46,6 +46,9 @@ filetype plugin indent on
 filetype indent on
 set sw=4
 
+" remapping ctrl+w to tab
+noremap <tab> <c-w>
+
 map <f2> :w\|!python %
 
 set shiftwidth=4 " sets the tab size equals 4 spaces
@@ -79,6 +82,8 @@ function! ToggleLineNumber()
     set number!
 endfunction
 :map <F2> :call ToggleLineNumber()<CR>
+:imap <F2> <Esc>:call ToggleLineNumber()<CR>a
+:vmap <F2> <Esc>:call ToggleLineNumber()<CR>a
 
 " Function to delete all unchanged buffers
 function! DeleteHiddenBuffers()
@@ -107,9 +112,24 @@ endfunction
 "    execute '!phpcs %'
 "endfunction
 function! PHPFix()
+    write
     execute '!clear; phpcbf %; phpcs %'
+    write
 endfunction
 
 " Change the default snipmate trigger key to <tab>
 " :imap <C-l> <Plug>snipMateTrigger 
 :imap <tab> <Plug>snipMateNextOrTrigger
+
+" 
+function! UpsertIndenting()
+    let extension = expand('%:e')
+    if extension == 'php'
+        :call PHPFix()
+    endif
+endfunction
+:map <F3> :call UpsertIndenting()<CR>
+:nmap <F3> :call UpsertIndenting()<CR>
+:imap <F3> <Esc> :call UpsertIndenting()<CR>
+:vmap <F3> <Esc> :call UpsertIndenting()<CR>
+
