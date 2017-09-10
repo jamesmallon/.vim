@@ -60,9 +60,10 @@ if [ -z "$(which npm)" ]; then
     fi
 fi
 
-# install plugins
+# environment plugins
 git clone https://github.com/fatih/vim-go.git 
 git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/sheerun/vim-polyglot
 # php
 git clone https://github.com/vim-php/vim-composer.git
 git clone https://github.com/vim-php/vim-phpunit.git 
@@ -70,6 +71,7 @@ git clone https://github.com/vim-php/vim-phpunit.git
 git clone https://github.com/beyondwords/vim-twig.git 
 # laravel
 git clone git://github.com/jwalton512/vim-blade.git
+git clone https://github.com/noahfrederick/vim-laravel
 # snipmate
 git clone https://github.com/tomtom/tlib_vim.git 
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git 

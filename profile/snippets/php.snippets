@@ -1,7 +1,7 @@
 snippet php
 	<?php
 	/**
-	 * PHP Version 7
+	 * PHP Version 7.2
 	 *
 	 * @category ${1}
 	 * @package ${2}
@@ -208,33 +208,33 @@ snippet pbm
 	 * Public method $2 - $3
 	 *
 	 * @method ${1:} ${2:} ${3:}
-	 * @return $1
+	 * @return $1 ${4:}
 	 */
-	public function $2(${4})${5:}
+	public function $2(${5})${6:}
 	{
-		${6}
+		${7}
 	}
 snippet pdm
 	/**
 	 * Protected method $2 - $3
 	 *
 	 * @method ${1:} ${2:} ${3:}
-	 * @return $1
+	 * @return $1 ${4}
 	 */
-	protected function $2(${4})${5:}
+	protected function $2(${5})${6:}
 	{
-		${6}
+		${7}
 	}
-snippet pvm
+snippet pvm 
 	/**
 	 * Private method $2 - $3 
 	 *
 	 * @method ${1:} ${2:} ${3:}
-	 * @return $1
+	 * @return $1 ${4}
 	 */
-	private function $2(${4})${5:}
+	private function $2(${5})${6:}
 	{
-		${6}
+		${7}
 	}
 # properties
 snippet pdoc
@@ -299,3 +299,9 @@ snippet whl
 		${2}
 	}
 
+# Laravel with Bootstrap
+snippet formg
+	<div class="form-group">
+		<label for="${1}">${2}</label>
+		<input type="${3}" class="form-control" id="$1" name="$1">
+	</div>
