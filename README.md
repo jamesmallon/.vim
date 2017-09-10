@@ -23,5 +23,9 @@ $ ./install.sh
 - vim-javascript-syntax
 - snipmate-nodejs
 - jshint
+- vim-blade
+- vim-laravel
+- vim-polyglot
+- vim-twig
 
 Have fun!
