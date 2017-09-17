@@ -236,6 +236,39 @@ snippet pvm
 	{
 		${7}
 	}
+snippet pbsm
+	/**
+	 * Public static method $2 - $3
+	 *
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1 ${4:}
+	 */
+	public static function $2(${5})${6:}
+	{
+		${7}
+	}
+snippet pdsm
+	/**
+	 * Protected static method $2 - $3
+	 *
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1 ${4}
+	 */
+	protected static function $2(${5})${6:}
+	{
+		${7}
+	}
+snippet pvsm 
+	/**
+	 * Private static method $2 - $3 
+	 *
+	 * @method ${1:} ${2:} ${3:}
+	 * @return $1 ${4}
+	 */
+	private static function $2(${5})${6:}
+	{
+		${7}
+	}
 # properties
 snippet pdoc
 	/**
@@ -264,6 +297,27 @@ snippet pvp
 	 * @var ${1} ${2:} ${3:}
 	 */
 	private $2;
+snippet pbsp
+	/**
+	 * Public static property $2 - $3
+	 *
+	 * @var ${1} ${2:} ${3:}
+	 */
+	public static $2;
+snippet pdsp
+	/**
+	 * Protected static property $2 - $3
+	 *
+	 * @var ${1} ${2:} ${3:}
+	 */
+	protected static $2;
+snippet pvsp
+	/**
+	 * Private static property $2 - $3
+	 *
+	 * @var ${1} ${2:} ${3:}
+	 */
+	private static $2;
 # conditionals
 snippet if
 	if (${1}) {
