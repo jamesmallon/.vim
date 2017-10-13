@@ -2,7 +2,7 @@
 
 # author Thiago Mallon <thiagomallon@gmail.com>
 
-vimProf="~/vim/profile"
+vimProf=~/vim/profile
 vimBndl=~/vim/profile/bundle
 vimAuto=~/vim/profile/autoload
 
@@ -48,19 +48,19 @@ mkdir $vimBndl
 cd $vimBndl
 
 # ensure globally installation of jshint
-#if [ -z "$(which npm)" ]; then
-#    printf "\n"'\e[36m'"Hmm I've checked that you don't have "'\e[33m'"npm "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want to install it now? [Y/n]"'\e[0m'"\n"
-#
-#    read resp
-#
-#    if [ -z "$resp" ]; then
-#        sudo apt install npm
-#        npm install -g jshint
-#    else
-#        printf '\e[36m'"Ok, install npm and run this script again."'\e[0m'"\n"
-#        exit 1
-#    fi
-#fi
+if [ -z "$(which npm)" ]; then
+    printf "\n"'\e[36m'"Hmm I've checked that you don't have "'\e[33m'"npm "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want to install it now? [Y/n]"'\e[0m'"\n"
+
+    read resp
+
+    if [ -z "$resp" ]; then
+        sudo apt install npm
+        npm install -g jshint
+    else
+        printf '\e[36m'"Ok, install npm and run this script again."'\e[0m'"\n"
+        exit 1
+    fi
+fi
 
 # environment plugins
 git clone https://github.com/fatih/vim-go.git 
@@ -79,10 +79,10 @@ git clone https://github.com/tomtom/tlib_vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git 
 git clone https://github.com/garbas/vim-snipmate.git 
 # node plugins
-#git clone https://github.com/moll/vim-node.git 
-#git clone https://github.com/jelera/vim-javascript-syntax.git 
-#git clone https://github.com/jamescarr/snipmate-nodejs.git 
-#git clone https://github.com/walm/jshint.vim 
+git clone https://github.com/moll/vim-node.git 
+git clone https://github.com/jelera/vim-javascript-syntax.git 
+git clone https://github.com/jamescarr/snipmate-nodejs.git 
+git clone https://github.com/walm/jshint.vim 
 
 # ask for set compiled vim as the system default text editor
 printf '\e[36m'"Select the system default text editor:\n"'\e[0m'
