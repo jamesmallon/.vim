@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# author Thiago Mallon <thiagomallon@gmail.com>
+
 vimProf="~/vim/profile"
 vimBndl=~/vim/profile/bundle
 vimAuto=~/vim/profile/autoload
