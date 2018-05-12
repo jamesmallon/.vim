@@ -1,31 +1,29 @@
-# Fast setup for Vim (no install) - Ubuntu
-It has customized color themes, snippets and .vimrc file. The goal is to setting up easier and faster a development based Vim version by using a compiled version and all customization that works for me.
+# Linux (Debian) Vim configured as IDE
+- customized color themes, 
+- snippets
+- .vimrc file. 
 
 # Installation
 
 ```sh
-$ apt install vim
-$ mkdir ~/vim 
-$ cd ~/vim
-$ ./install.sh
+$ git clone https://github.com/jamesmallon/.vim.git ~/.vim
+$ ~/.vim/install.sh
 ```
 
 # installed plugins
-- pathogen
-- nerdtree
-- vim-go
-- vim-composer
-- vim-phpunit
-- tlib_vim
-- vim-addon-mw-utils
-- vim-snipmate
-- vim-node
-- vim-javascript-syntax
-- snipmate-nodejs
-- jshint
-- vim-blade
-- vim-laravel
-- vim-polyglot
-- vim-twig
+- [pathogen]
+- [nerdtree]
+- [vim-go]
+- [vim-snipmate]
+- [vim-polyglot]
 
 Have fun!
+
+**by [Thiago Mallon]**
+
+[Thiago Mallon]: <https://www.linkedin.com/in/thiago-mallon/>
+[pathogen]: <https://github.com/tpope/vim-pathogen>
+[vim-go]: <https://github.com/fatih/vim-go.git>
+[nerdtree]: <https://github.com/scrooloose/nerdtree.git>
+[vim-polyglot]: <https://github.com/sheerun/vim-polyglot>
+[vim-snipmate]: <https://github.com/garbas/vim-snipmate.git>
