@@ -1,13 +1,79 @@
-snippet if
-    if (${1}) {
-        ${2}
-    }
-snippet else
-    else {
-        ${1}
-    }
-snippet fn
-	(${1}) => ${2}
-snippet fn1
-	${1} => ${2}
+#Author: Thiago Mallon <thiagomallon@gmail.com>
+snippet af
+	${1:} = (${2:}) => {
+		${3:}
+	}
+snippet clg 
+	console.log(${1:})
+# create a new component class
+snippet imp
+	import ${1:} from '${2:}'
+snippet pt
+	PropTypes.
+snippet pts
+	PropTypes.string,
+snippet ptsr
+	PropTypes.string.isRequired,
+snippet ptf
+	PropTypes.func,
+snippet ptfr
+	PropTypes.func.isRequired,
+snippet pto
+	PropTypes.object,
+snippet ptor
+	PropTypes.object.isRequired,
+snippet pti
+	PropTypes.integer,
+snippet ptir
+	PropTypes.integer.isRequired,
+snippet pta
+	PropTypes.array,
+snippet ptar
+	PropTypes.array.isRequired,
+snippet ptb
+	PropTypes.bool,
+snippet ptbr
+	PropTypes.bool.isRequired,
+snippet rcomp 
+	/** @author Thiago Mallon <thiagomallon@gmail.com>
+	 * Component $1
+	 */ 
+	import React, {Component,Fragment} from 'react'
+	import PropTypes from 'prop-types'
 
+	/**
+	 * @class $1
+	 */
+	class ${1:} extends Component {
+		static defaultProps = {}
+		static propTypes = {}
+		state = {}
+		render() {
+			return (
+				<Fragment>
+					${2}
+				</Fragment>
+			)
+		}
+	}
+
+	export default $1
+
+snippet rfcomp
+	/** @author Thiago Mallon <thiagomallon@gmail.com>
+	 * Component $1
+	 */ 
+	import React, { Fragment } from 'react'
+	import PropTypes from 'prop-types'
+
+	const ${1:} = (${2}) => {
+		return (
+			<Fragment>
+				${3}
+			</Fragment>
+		)
+	}
+
+	$1.propTypes = {}
+
+	export default $1
