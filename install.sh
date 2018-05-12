@@ -1,20 +1,34 @@
 #!/bin/bash
-# author Thiago Mallon <thiagomallon@gmail.com>
+# Author Thiago Mallon <thiagomallon@gmail.com>
 
-vimProf=~/vim/profile
-vimBndl=~/vim/profile/bundle
-vimAuto=~/vim/profile/autoload
+vimProf=~/.vim/profile
+vimBndl=~/.vim/profile/bundle
+vimAuto=~/.vim/profile/autoload
+
+# adding some interactive text color
+printCyan() {   
+    printf '\e[36m'"$1"'\e[0m';
+}
+
+printYellow() { 
+    printf '\e[33m'"$1"'\e[0m';
+}
+
+printRedSpecial() {
+    printf '\e[1;38;5;198;48;5;15m'"$1"'\e[0m';
+}
 
 # ensuring vim installation
 if [ -z "$(which vim)" ]; then
-    printf "\n"'\e[36m'"Oops "'\e[33m'"vim "'\e[36m'" is not installed.\nIt is necessary to have it installed first.\n - We will just add some plugins and add some configs and functions to your .vimrc\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
+    printCyan "\nHey! You don't have "; printYellow "vim "; printCyan " is not installed.\nIt is necessary to have it installed first.\n - We will just add some plugins and add some configs and functions to your .vimrc\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
-    if [ -z "$resp" ]; then
+    if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
+    then
         sudo apt install vim
     else
-        printf '\e[36m'"Ok, install vim and run this script again."'\e[0m'"\n"
+        printCyan "Ok, install vim and run this script again.\n";
         exit 1
     fi
 fi
@@ -24,14 +38,15 @@ sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
 # ensuring cURL installation
 if [ -z "$(which curl)" ]; then
-    printf "\n"'\e[36m'"Hey! You don't have "'\e[33m'"curl "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want me to install it now? [Y/n]"'\e[0m'"\n"
+    printCyan "\nHey! You don't have "; printYellow "curl "; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
-    if [ -z "$resp" ]; then
+    if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
+    then
         sudo apt install curl
     else
-        printf '\e[36m'"Ok, install curl and run this script again."'\e[0m'"\n"
+        printCyan "Ok, install curl and run this script again.\n";
         exit 1
     fi
 fi
@@ -46,17 +61,36 @@ curl -LSso $vimAuto/pathogen.vim https://tpo.pe/pathogen.vim
 mkdir $vimBndl 
 cd $vimBndl
 
-# ensure globally installation of jshint
-if [ -z "$(which npm)" ]; then
-    printf "\n"'\e[36m'"Hmm I've checked that you don't have "'\e[33m'"npm "'\e[36m'" installed.\n\n"'\e[1;38;5;27;48;5;15m'"Do you want to install it now? [Y/n]"'\e[0m'"\n"
+# ensuring git installation
+if [ -z "$(which git)" ]; then
+    printCyan "\nHey! You don't have "; printYellow "git"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
-    if [ -z "$resp" ]; then
-        sudo apt install npm
-        npm install -g jshint
+    if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
+    then
+        sudo apt install git
     else
-        printf '\e[36m'"Ok, install npm and run this script again."'\e[0m'"\n"
+        printCyan "Ok, install git and run this script again.\n";
+        exit 1
+    fi
+fi
+
+# ensuring go installation
+if [ -z "$(which go)" ]; then
+    printCyan "\nHey! You don't have "; printYellow "go"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to download and install it now? [Y/n]"; printf "\n";
+
+    read resp
+
+    if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
+    then
+        printCyan "Going to install "; printYellow "GO 1.14.1\n"
+        wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
+        tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz
+        rm go1.14.2.linux-amd64.tar.gz
+        sh -c 'printf "export GOROOT=/usr/local/go\nexport GOPATH=\$HOME/go\nexport PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH" >> ~/.profile'
+    else
+        printCyan "Ok, install go and run this script again.\n";
         exit 1
     fi
 fi
@@ -65,24 +99,18 @@ fi
 git clone https://github.com/fatih/vim-go.git 
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/sheerun/vim-polyglot
-# php
-git clone https://github.com/vim-php/vim-composer.git
-git clone https://github.com/vim-php/vim-phpunit.git 
-# symfony
-git clone https://github.com/beyondwords/vim-twig.git 
-# laravel
-git clone git://github.com/jwalton512/vim-blade.git
-git clone https://github.com/noahfrederick/vim-laravel
+
 # snipmate
 git clone https://github.com/tomtom/tlib_vim.git 
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git 
 git clone https://github.com/garbas/vim-snipmate.git 
-# node plugins
-git clone https://github.com/moll/vim-node.git 
-git clone https://github.com/jelera/vim-javascript-syntax.git 
-git clone https://github.com/jamescarr/snipmate-nodejs.git 
-git clone https://github.com/walm/jshint.vim 
+
+# javascript
+git clone https://github.com/maksimr/vim-jsbeautify
+
+# set up jsbeautify submodule
+cd vim-jsbeautify && git submodule update --init --recursive
 
 # ask for set compiled vim as the system default text editor
-printf '\e[36m'"Select the system default text editor:\n"'\e[0m'
+printCyan "Select the system default text editor:\n"
 sudo update-alternatives --config editor
