@@ -10,10 +10,10 @@ endif
 endif
 let colors_name = "mallon"
 
-"set colorcolumn=90 "set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 set nuw=4 "padding between nerdtree border and line number      
 
+:hi ColorColumn ctermbg=235
 :hi Normal guifg=White guibg=grey15
 :hi Cursor guibg=khaki guifg=slategrey
 :hi VertSplit ctermfg=241 ctermbg=241 cterm=NONE guifg=#64645e guibg=#64645e gui=NONE
@@ -23,7 +23,7 @@ set nuw=4 "padding between nerdtree border and line number
 ":hi ModeMsg guifg=goldenrod cterm=none ctermfg=brown
 :hi MoreMsg guifg=SeaGreen ctermfg=darkgreen
 "color to fill non written area
-:hi NonText cterm=NONE ctermbg=black ctermfg=black gui=NONE guibg=black guifg=black
+:hi NonText cterm=NONE ctermbg=NONE ctermfg=black gui=NONE guibg=black guifg=black
 :hi EndOfBuffer ctermfg=black ctermbg=none
 :hi Question guifg=springgreen ctermfg=green
 :hi Search guibg=peru guifg=wheat cterm=none ctermfg=black ctermbg=blue
@@ -49,6 +49,7 @@ set nuw=4 "padding between nerdtree border and line number
 :hi Structure guifg=green ctermfg=green
 ":hi LineNr guifg=grey50 ctermfg=3
 :hi LineNr ctermfg=102 ctermbg=237 cterm=NONE guifg=#90908a guibg=#3c3d37 gui=NONE 
+":hi LineNr ctermfg=102 ctermbg=237 cterm=NONE guifg=NONE guibg=NONE gui=NONE 
 :hi Ignore guifg=grey40 cterm=bold ctermfg=7
 :hi Todo guifg=orangered guibg=yellow2
 :hi Directory ctermfg=cyan
