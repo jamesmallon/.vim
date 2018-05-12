@@ -26,7 +26,6 @@ set noswapfile
 "set spell
 set autoread " enable file auto refresh
 au CursorHold * checktime
-"autocmd BufWrite *.php :! phpcbf % 
 
 set colorcolumn=85 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
@@ -41,7 +40,11 @@ set matchpairs+=<:>
 " allow multiple edition in vim's buffer
 set hidden
 
-syntax enable
+" vim-jsbeautify
+map <c-f> :call JsBeautify()<cr>
+
+"syntax enable
+syntax on
 filetype plugin indent on
 filetype indent on
 set sw=4
@@ -71,11 +74,13 @@ set backspace=indent,eol,start
 let NERDTreeShowHidden=1 " Config to show hidden file and folders
 
 "let NERDTreeChDirMode=2 " Config to refresh directories
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 
 " maps nerdtree toggle function to F6 key
-nmap <F6> :NERDTreeToggle<CR> 
+:nmap <F6> :NERDTreeToggle<CR> 
+:imap <F6> :NERDTreeToggle<CR> 
+:vmap <F6> :NERDTreeToggle<CR> 
 
 " <F2> calls ToggleLineNumber
 function! ToggleLineNumber()
@@ -118,18 +123,38 @@ function! PHPFix()
 endfunction
 
 " Change the default snipmate trigger key to <tab>
-" :imap <C-l> <Plug>snipMateTrigger 
+" :imap <C-l> <Plug>snipMateTrigger
 :imap <tab> <Plug>snipMateNextOrTrigger
 
-" 
+"
 function! UpsertIndenting()
     let extension = expand('%:e')
     if extension == 'php'
         :call PHPFix()
     endif
 endfunction
+
 :map <F3> :call UpsertIndenting()<CR>
 :nmap <F3> :call UpsertIndenting()<CR>
 :imap <F3> <Esc> :call UpsertIndenting()<CR>
 :vmap <F3> <Esc> :call UpsertIndenting()<CR>
 
+" Run script 
+function! RunScript()
+    let extension = expand('%:e')
+    if extension == 'py'
+        write
+        execute '!clear;python3 %:p'
+    elseif extension == 'sh'
+        write
+        "execute '!clear;./%'
+        execute '!clear;%:p'
+    endif
+endfunction
+:map <F5> <Esc>:w<CR>:call RunScript()<CR>
+:imap <F5> <Esc>:w<CR>:call RunScript()<CR>
+:vmap <F5> <Esc>:w<CR>:call RunScript()<CR>
+:noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
+
+" suppressing errors related to vim-go
+let g:go_version_warning = 0
