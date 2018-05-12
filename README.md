@@ -1,4 +1,4 @@
-# Linux (Debian) Vim configured as IDE
+# Vim configured as IDE
 - customized color themes, 
 - snippets
 - .vimrc file. 
