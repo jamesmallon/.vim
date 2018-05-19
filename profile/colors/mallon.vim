@@ -1,5 +1,12 @@
-"%% SiSU Vim color file
-" Mallon Maintainer: Thiago Mallon<thiagomallon@gmail.com>
+"
+" Name: mallon 
+" Version: 1.0.0
+" Maintainer: Thiago Mallon <thiaomallon@gmail.com
+" Licence: The MIT Licence (MIT)
+" 
+" Description:
+"   Vim colorscheme by Thiago Mallon.
+"
 :set background=dark
 :highlight clear
 if version > 580
