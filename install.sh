@@ -86,7 +86,7 @@ if [ -z "$(which go)" ]; then
     then
         printCyan "Going to install "; printYellow "GO 1.14.1\n"
         wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
-        tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz
         rm go1.14.2.linux-amd64.tar.gz
         sh -c 'printf "export GOROOT=/usr/local/go\nexport GOPATH=\$HOME/go\nexport PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH" >> ~/.profile'
     else
