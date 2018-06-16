@@ -26,7 +26,7 @@ if [ -z "$(which vim)" ]; then
 
     if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
     then
-        sudo apt install vim
+        sudo yum install vim
     else
         printCyan "Ok, install vim and run this script again.\n";
         exit 1
@@ -44,7 +44,7 @@ if [ -z "$(which curl)" ]; then
 
     if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
     then
-        sudo apt install curl
+        sudo yum install curl
     else
         printCyan "Ok, install curl and run this script again.\n";
         exit 1
@@ -69,7 +69,7 @@ if [ -z "$(which git)" ]; then
 
     if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
     then
-        sudo apt install git
+        sudo yum install git
     else
         printCyan "Ok, install git and run this script again.\n";
         exit 1
