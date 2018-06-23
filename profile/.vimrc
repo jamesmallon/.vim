@@ -156,5 +156,31 @@ endfunction
 :vmap <F5> <Esc>:w<CR>:call RunScript()<CR>
 :noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
 
+" Build and run c script 
+function! CBuild()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        execute '!clear;gcc %:p -o %:r.o;'
+    endif
+endfunction
+:map <F4> <Esc>:w<CR>:call CBuild()<CR>
+:imap <F4> <Esc>:w<CR>:call CBuild()<CR>
+:vmap <F4> <Esc>:w<CR>:call CBuild()<CR>
+:noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
+
+" Build and run c script 
+function! CBuildRun()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        execute '!clear;gcc %:p -o %:r.o; ./%:r.o'
+    endif
+endfunction
+:map <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:imap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+
 " suppressing errors related to vim-go
 let g:go_version_warning = 0
