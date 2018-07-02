@@ -1,6 +1,6 @@
 # installation folders
-profile/bundle/
-profile/autoload/
+profile/bundle/*
+profile/autoload/*
 
 # Prerequisites
 *.d
