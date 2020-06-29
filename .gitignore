@@ -51,5 +51,3 @@ profile/autoload/*
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# ignoring the .git folder
-.git

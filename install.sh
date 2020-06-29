@@ -20,7 +20,7 @@ printRedSpecial() {
 
 # ensuring vim installation
 if [ -z "$(which vim)" ]; then
-    printCyan "\nHey! You don't have "; printYellow "vim "; printCyan " is not installed.\nIt is necessary to have it installed first.\n - We will just add some plugins and add some configs and functions to your .vimrc\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
+    printCyan "\nIt seems that you don't have "; printYellow "vim "; printCyan " is not installed.\nIt is necessary to have it installed first.\n - We will just add some plugins and add some configs and functions to your .vimrc\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
@@ -38,7 +38,7 @@ sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
 # ensuring cURL installation
 if [ -z "$(which curl)" ]; then
-    printCyan "\nHey! You don't have "; printYellow "curl "; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
+    printCyan "\nIt seems that you don't have "; printYellow "curl "; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
@@ -63,7 +63,7 @@ cd $vimBndl
 
 # ensuring git installation
 if [ -z "$(which git)" ]; then
-    printCyan "\nHey! You don't have "; printYellow "git"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
+    printCyan "\nIt seems that you don't have "; printYellow "git"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to install it now? [Y/n]"; printf "\n";
 
     read resp
 
@@ -79,7 +79,7 @@ fi
 # ensuring go installation
 if [ -z "$(which go)" ]; then
     GOVERSION="1.14.4"
-    printCyan "\nHey! You don't have "; printYellow "go"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to download and install it now? [Y/n]"; printf "\n";
+    printCyan "\nIt seems that you don't have "; printYellow "go"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to download and install it now? [Y/n]"; printf "\n";
 
     read resp
 
