@@ -78,7 +78,7 @@ fi
 
 # ensuring go installation
 if [ -z "$(which go)" ]; then
-    GOVERSION = "1.14.4"
+    GOVERSION="1.14.4"
     printCyan "\nHey! You don't have "; printYellow "go"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to download and install it now? [Y/n]"; printf "\n";
 
     read resp
