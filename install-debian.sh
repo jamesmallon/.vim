@@ -78,16 +78,17 @@ fi
 
 # ensuring go installation
 if [ -z "$(which go)" ]; then
+    GOVERSION = "1.14.4"
     printCyan "\nHey! You don't have "; printYellow "go"; printCyan " installed.\n\n"; printRedSpecial "Do you want me to download and install it now? [Y/n]"; printf "\n";
 
     read resp
 
     if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
     then
-        printCyan "Going to install "; printYellow "GO 1.14.1\n"
-        wget https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz
-        sudo tar -C /usr/local -xzf go1.14.2.linux-amd64.tar.gz
-        rm go1.14.2.linux-amd64.tar.gz
+        printCyan "Going to install "; printYellow "GO $GOVERSION\n"
+        wget https://dl.google.com/go/go$GOVERSION.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf go$GOVERSION.linux-amd64.tar.gz
+        rm go$GOVERSION.linux-amd64.tar.gz
         sh -c 'printf "export GOROOT=/usr/local/go\nexport GOPATH=\$HOME/go\nexport PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH" >> ~/.profile'
     else
         printCyan "Ok, install go and run this script again.\n";
