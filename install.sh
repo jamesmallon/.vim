@@ -19,11 +19,11 @@ printRed() {
 }
 
 install_go() {
-        GOIVER="$(curl -s https://golang.org/VERSION?m=text | perl -pe 's/go//')"
+        GOIVER="$(curl -s https://golang.org/VERSION?m=text)"
         printOrange "Preparing to install "; printBlue "GO $GOIVER\n"
-        wget https://dl.google.com/go/go$GOIVER.linux-amd64.tar.gz
-        sudo tar -C /usr/local -xzf go$GOIVER.linux-amd64.tar.gz
-        rm go$GOIVER.linux-amd64.tar.gz
+        wget https://dl.google.com/go/$GOIVER.linux-amd64.tar.gz
+        sudo tar -C /usr/local -xzf $GOIVER.linux-amd64.tar.gz
+        rm $GOIVER.linux-amd64.tar.gz
         sh -c 'printf "export GOROOT=/usr/local/go\nexport GOPATH=\$HOME/go\nexport PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH" >> ~/.profile'
 
 PROGRAMS=("vim" "curl" "git" "go")
