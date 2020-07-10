@@ -1,9 +1,11 @@
-# Vim configured as IDE
+# Vim configured as IDE (Debian based or Red Hat based)
+
+**The installation file will identify Red Hat based or Debian base Linux distros (Fedora, CentOS, Ubuntu, Red Hat, Debian, Trisquel, Mint, etc) and install the dependencies selecting the right package manager.**
 - customized color themes, 
 - snippets
 - .vimrc file. 
 
-# Installation
+# Installation 
 
 ```sh
 $ git clone https://github.com/jamesmallon/.vim.git ~/.vim
