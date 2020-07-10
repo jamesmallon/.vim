@@ -182,5 +182,24 @@ endfunction
 :vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
 :noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
 
+" Build and run c script 
+function! CBuildRun()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        execute '!clear;gcc %:p -o %:r.o; ./%:r.o'
+    endif
+endfunction
+:map <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:imap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+:noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+
+function! AVRBuild()
+    " clean project
+    execute '!rm -rf  avrdudedummy  delay_led_blinking.hex  ./src/Blink.o ./src/main.o  sizedummy  ./src/Blink.d ./src/main.d  delay_led_blinking.elf'
+    " build project
+endfunction
+
 " suppressing errors related to vim-go
 let g:go_version_warning = 0
