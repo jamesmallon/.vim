@@ -1,11 +1,14 @@
 #!/bin/bash
-# Author Thiago Mallon <thiagomallon@gmail.com>
+# Author: Thiago Mallon <thiagomallon@gmail.com>
 
 exec 2> logs/error-install.log
 
 vimProf=~/.vim/profile
 vimBndl=~/.vim/profile/bundle
 vimAuto=~/.vim/profile/autoload
+AV_PKG=("dnf" "yum" "apt")
+PKGMNG=""
+PROGRAMS=("vim" "curl" "git" "go")
 
 # adding some interactive text color
 printOrange() {
@@ -20,6 +23,40 @@ printRed() {
     printf "\33[40;31m$1\33[0m";
 }
 
+check_pkgmng(){
+    for i in "${!AV_PKG[@]}"
+    do
+        if command -v ${AV_PKG[$i]} &> /dev/null
+        then
+            PKGMNG=${AV_PKG[$i]}
+            check_reqs
+            break
+        else
+            printRed "Package manager not supported" 
+        fi
+    done
+}
+
+check_reqs(){
+    for i in "${!PROGRAMS[@]}" 
+    do
+        # ensuring vim installation of required programs
+        if ! command -v ${PROGRAMS[$i]} &> /dev/null
+        then
+            printOrange "\nIt seems that you don't have "; printBlue "${PROGRAMS[$i]} "; 
+            while true; do
+                printOrange "Would you like to install it now? [y/n]\n";
+                read resp
+                case $resp in
+                    [yY]) install_req ${PROGRAMS[$i]}; break;;
+                    [Nn]) printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n"; exit 0;;
+                    * ) echo "Invalid answer.";;
+                esac
+            done
+        fi
+    done
+}
+
 install_go() {
     GOIVER="$(curl -s https://golang.org/VERSION?m=text)"
     printOrange "Preparing to install "; printBlue "GO $GOIVER\n"
@@ -27,33 +64,18 @@ install_go() {
     sudo tar -C /usr/local -xzf $GOIVER.linux-amd64.tar.gz
     rm $GOIVER.linux-amd64.tar.gz
     sh -c 'printf "export GOROOT=/usr/local/go\nexport GOPATH=\$HOME/go\nexport PATH=\$GOPATH/bin:\$GOROOT/bin:\$PATH" >> ~/.profile'
+}
 
-PROGRAMS=("vim" "curl" "git" "go")
-
-for i in "${!PROGRAMS[@]}" 
-do
-    # ensuring vim installation
-    if ! command -v ${PROGRAMS[$i]} &> /dev/null
+install_req(){
+    if [ "$1" = "go" ]; 
     then
-        printOrange "\nIt seems that you don't have "; printBlue "${PROGRAMS[$i]} "; 
-        printOrange "Would you like to install it now? [Y/n]\n";
-
-        read resp
-
-        if [ -z $resp ] || [ $resp == "Y" ] || [ $resp == "y" ]
-        then
-            if [ "${PROGRAMS[$i]}" = "go" ]; 
-            then
-                install_go
-                continue
-            fi
-            sudo yum install ${PROGRAMS[$i]}
-        else
-            printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n";
-            exit 0
-        fi
+        install_go
+    else
+        eval sudo $PKGMNG install ${1}
     fi
-done
+}
+
+check_pkgmng
 
 # get back to autoload folder
 mkdir $vimAuto
@@ -80,7 +102,3 @@ git clone https://github.com/maksimr/vim-jsbeautify
 
 # set up jsbeautify submodule
 cd vim-jsbeautify && git submodule update --init --recursive
-
-# ask for set compiled vim as the system default text editor
-#printOrange "Select the system default text editor:\n"
-#sudo update-alternatives --config editor
