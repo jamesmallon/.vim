@@ -6,7 +6,7 @@ exec 2> logs/error-install.log
 vimProf=~/.vim/profile
 vimBndl=~/.vim/profile/bundle
 vimAuto=~/.vim/profile/autoload
-AV_PKG=("dnf" "yum" "apt")
+AV_PKG=("dnf" "yum" "apt-get" "apt")
 PKGMNG=""
 PROGRAMS=("vim" "curl" "git" "go")
 
