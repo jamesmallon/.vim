@@ -142,12 +142,8 @@ endfunction
 " Run script 
 function! RunScript()
     let extension = expand('%:e')
-    if extension == 'py'
+    if extension == 'py' || extension == 'sh'
         write
-        execute '!clear;python3 %:p'
-    elseif extension == 'sh'
-        write
-        "execute '!clear;./%'
         execute '!clear;%:p'
     endif
 endfunction
@@ -194,12 +190,6 @@ endfunction
 :imap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
 :vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
 :noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-
-function! AVRBuild()
-    " clean project
-    execute '!rm -rf  avrdudedummy  delay_led_blinking.hex  ./src/Blink.o ./src/main.o  sizedummy  ./src/Blink.d ./src/main.d  delay_led_blinking.elf'
-    " build project
-endfunction
 
 " suppressing errors related to vim-go
 let g:go_version_warning = 0
