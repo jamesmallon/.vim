@@ -8,7 +8,7 @@ exec 2>> >(tee -a "$LOG")
 vimProf=~/.vim/profile
 vimBndl=~/.vim/profile/bundle
 vimAuto=~/.vim/profile/autoload
-AV_PKG=("dnf" "yum" "apt-get" "apt")
+AV_PKG=("dnf" "yum" "apt-get" "apt" "pacman")
 PKGMNG=""
 PROGRAMS=("vim" "curl" "git" "go")
 
@@ -76,7 +76,12 @@ install_req() {
     then
         install_go
     else
-        eval sudo $PKGMNG install ${1}
+	if [ "$PKGMNG" = "pacman" ]
+	then
+	    eval sudo $PKGMNG -Syu ${1}
+	else
+	    eval sudo $PKGMNG install ${1}
+	fi
     fi
 }
 
