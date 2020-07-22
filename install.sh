@@ -51,7 +51,7 @@ ensure_depend(){
             printOrange "Would you like to install it now? [y/n]\n";
             read resp
             case $resp in
-                [yY]) install_req ${PROGRAMS[$i]}; break;;
+                [yY]) install_req ${PROGRAMS[$i]} ;;
                 [Nn]) printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n"; exit 0;;
                 * ) echo "Invalid answer.";;
             esac
