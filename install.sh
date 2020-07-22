@@ -76,12 +76,12 @@ install_req() {
     then
         install_go
     else
-	if [ "$PKGMNG" = "pacman" ]
-	then
-	    eval sudo $PKGMNG -Syu ${1}
-	else
-	    eval sudo $PKGMNG install ${1}
-	fi
+        if [ "$PKGMNG" = "pacman" ]
+        then
+            eval sudo $PKGMNG -Syu ${1}
+        else
+            eval sudo $PKGMNG install ${1}
+        fi
     fi
 }
 
@@ -115,13 +115,28 @@ setup_dependencies() {
 
 	# set up jsbeautify submodule
 	cd vim-jsbeautify && git submodule update --init --recursive
-
-    if [ "$PKGMNG" = "apt-get" -o "$PKGMNG" = "apt" ]
-    then
-        # ask for set compiled vim as the system default text editor
-        printOrange "Select the system default text editor:\n"
-        sudo update-alternatives --config editor
-    fi
 }
 
-check_pkgmng
+set_as_default() {
+    case "$XDG_CURRENT_DESKTOP" in
+        "XFCE")
+            sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile 
+            break;;
+        "GNOME")
+            sudo update-alternatives --config editor
+            break;;
+    esac
+}
+
+install() {
+    check_pkgmng
+
+    printOrange "Would you like to set Vim as the default text editor:\n"
+    read resp
+    case $resp in
+        [yY]) set_as_default; break;;
+        [Nn]) exit 0;;
+        * ) echo "Invalid answer.";;
+    esac
+}
+install
