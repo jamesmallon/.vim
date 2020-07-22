@@ -48,15 +48,13 @@ ensure_depend(){
         if ! command -v ${PROGRAMS[$i]} &> /dev/null
         then
             printOrange "\nIt seems that you don't have "; printBlue "${PROGRAMS[$i]} "; 
-            while true; do
-                printOrange "Would you like to install it now? [y/n]\n";
-                read resp
-                case $resp in
-                    [yY]) install_req ${PROGRAMS[$i]}; break;;
-                    [Nn]) printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n"; exit 0;;
-                    * ) echo "Invalid answer.";;
-                esac
-            done
+            printOrange "Would you like to install it now? [y/n]\n";
+            read resp
+            case $resp in
+                [yY]) install_req ${PROGRAMS[$i]}; break;;
+                [Nn]) printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n"; exit 0;;
+                * ) echo "Invalid answer.";;
+            esac
         fi
     done
 }
@@ -119,10 +117,10 @@ set_as_default() {
     case "$XDG_CURRENT_DESKTOP" in
         "XFCE")
             sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile 
-            break;;
+            ;;
         "GNOME")
             sudo update-alternatives --config editor
-            break;;
+            ;;
     esac
 }
 
@@ -131,10 +129,11 @@ install() {
     ensure_depend
     setup_env
 
-    printOrange "Would you like to set Vim as the default text editor:\n"
+    printOrange "Would you like to set Vim as the default text editor: [y/n]\n"
     read resp
     case $resp in
-        [yY]) set_as_default; break;;
+        [yY]) set_as_default
+        ;;
         [Nn]) exit 0;;
         * ) echo "Invalid answer.";;
     esac
