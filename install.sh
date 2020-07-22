@@ -14,15 +14,15 @@ PROGRAMS=("vim" "curl" "git" "go")
 
 # adding some interactive text color
 printOrange() {
-    printf "\e[40;33m$1\e[0m\n";
+    printf "\e[40;33m$1\e[0m";
 }
 
 printBlue() {
-    printf "\e[40;34m$1\e[0m\n";
+    printf "\e[40;34m$1\e[0m";
 }
 
 printRed() {
-    printf "\e[40;31m$1\e[0m\n";
+    printf "\e[40;31m$1\e[0m";
 }
 
 grab_pkgmng(){
@@ -116,11 +116,9 @@ setup_env() {
 set_as_default() {
     case "$XDG_CURRENT_DESKTOP" in
         "XFCE")
-            sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile 
-            ;;
+            sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile ;;
         "GNOME")
-            sudo update-alternatives --config editor
-            ;;
+            sudo update-alternatives --config editor ;;
     esac
 }
 
@@ -132,8 +130,7 @@ install() {
     printOrange "Would you like to set Vim as the default text editor: [y/n]\n"
     read resp
     case $resp in
-        [yY]) set_as_default
-        ;;
+        [yY]) set_as_default ;;
         [Nn]) exit 0;;
         * ) echo "Invalid answer.";;
     esac
