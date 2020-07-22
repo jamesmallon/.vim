@@ -25,23 +25,23 @@ printRed() {
     printf "\e[40;31m$1\e[0m\n";
 }
 
-check_pkgmng(){
+grab_pkgmng(){
     for i in "${!AV_PKG[@]}"
     do
         if command -v ${AV_PKG[$i]} &> /dev/null
         then
             PKGMNG=${AV_PKG[$i]}
-            check_reqs
             break
         fi
     done
     if [ -z "$PKGMNG" ];
     then
         printRed "Package manager not supported" 
+        exit 1;
     fi
 }
 
-check_reqs(){
+ensure_depend(){
     for i in "${!PROGRAMS[@]}" 
     do
         # ensuring vim installation of required programs
@@ -59,7 +59,6 @@ check_reqs(){
             done
         fi
     done
-    setup_dependencies
 }
 
 install_go() {
@@ -85,8 +84,7 @@ install_req() {
     fi
 }
 
-setup_dependencies() {
-
+setup_env() {
 	# configure ~/.vimrc file
 	sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
@@ -129,7 +127,9 @@ set_as_default() {
 }
 
 install() {
-    check_pkgmng
+    grab_pkgmng
+    ensure_depend
+    setup_env
 
     printOrange "Would you like to set Vim as the default text editor:\n"
     read resp
