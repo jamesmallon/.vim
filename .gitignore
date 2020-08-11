@@ -56,3 +56,6 @@ profile/autoload/*
 
 # test files
 *test*
+
+# view files
+view

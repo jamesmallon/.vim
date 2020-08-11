@@ -8,7 +8,7 @@ exec 2>> >(tee -a "$LOG")
 vimProf=~/.vim/profile
 vimBndl=~/.vim/profile/bundle
 vimAuto=~/.vim/profile/autoload
-AV_PKG=("dnf" "yum" "apt-get" "apt" "pacman")
+AV_PKG=("yum" "dnf" "apt" "apt-get" "pacman")
 PKGMNG=""
 PROGRAMS=("vim" "curl" "git" "go")
 
@@ -53,7 +53,7 @@ ensure_depend(){
             case $resp in
                 [yY]) install_req ${PROGRAMS[$i]} ;;
                 [Nn]) printRed "Ok, install ${PROGRAMS[$i]} and run this script again.\n"; exit 0;;
-                * ) echo "Invalid answer.";;
+                * ) echo "Invalid answer."; exit 1;;
             esac
         fi
     done
@@ -118,7 +118,7 @@ set_as_default() {
         "XFCE")
             sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile ;;
         "GNOME")
-            sudo update-alternatives --config editor ;;
+            sed -i 's/export EDITOR=\/usr\/bin\/nano/export EDITOR=\/usr\/bin\/vim/g' ~/.profile;;
     esac
 }
 
