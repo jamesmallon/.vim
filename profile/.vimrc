@@ -7,7 +7,7 @@ colorscheme mallon
 set number " displays line number
 set incsearch " vim highlights you string search as you're typing it
 set autoindent " vim keeps the spaces and tabs of above lines while you're adding new lines (great for coding)
-set smartindent " vim automatically indent lines inside of a curly braces
+set smartindent " vim automatically indent lines inside of curly braces
 set ruler " displays the cursor position all the time
 set showcmd " displays incomplete commands
 set wildmenu " displays vim complete suggestions for system functions
@@ -21,10 +21,10 @@ set smarttab
 set linebreak
 set et
 set title
-set noswapfile
+set noswapfile "no swap files
 "set backupdir=backups/
 "set spell
-set autoread " enable file auto refresh
+set autoread "enable file auto refresh
 au CursorHold * checktime
 
 set colorcolumn=85 " set a right border to serv as a sign to the line max length"
@@ -33,7 +33,6 @@ set nuw=4 "padding between nerdtree border and line number
 "set mouse=a "enable mouse wheel scrolling
 set mouse=c "enable mouse selectin
 set history=5 " keep the last 5 commands in memory
-set tabstop=4
 set matchtime=2
 set matchpairs+=<:>
 
@@ -45,9 +44,13 @@ map <c-f> :call JsBeautify()<cr>
 
 "syntax enable
 syntax on
+filetype on
 filetype plugin indent on
 filetype indent on
 set sw=4
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 " remapping ctrl+w to tab
 noremap <tab> <c-w>
@@ -110,12 +113,6 @@ function! ReleaseTmpFolder(tempFolder, user)
     execute '!chown '.a:user.':'.a:user.' /tmp/'.a:tempFolder
 endfunction
 
-" workaround for Fedora's bug
-"function! PHPFix()
-"    execute '!clear'
-"    execute '!phpcbf %'
-"    execute '!phpcs %'
-"endfunction
 function! PHPFix()
     write
     execute '!clear; phpcbf %; phpcs %'
@@ -123,7 +120,6 @@ function! PHPFix()
 endfunction
 
 " Change the default snipmate trigger key to <tab>
-" :imap <C-l> <Plug>snipMateTrigger
 :imap <tab> <Plug>snipMateNextOrTrigger
 
 "
@@ -164,19 +160,6 @@ endfunction
 :imap <F4> <Esc>:w<CR>:call CBuild()<CR>
 :vmap <F4> <Esc>:w<CR>:call CBuild()<CR>
 :noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
-
-" Build and run c script 
-function! CBuildRun()
-    let extension = expand('%:e')
-    if extension == 'c'
-        write
-        execute '!clear;gcc %:p -o %:r.o; ./%:r.o'
-    endif
-endfunction
-:map <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:imap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
 
 " Build and run c script 
 function! CBuildRun()
