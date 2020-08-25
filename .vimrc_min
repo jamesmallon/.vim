@@ -15,7 +15,7 @@
 "augroup END
 "let g:netrw_winsize = 50 "restore default window split size
 
-colorscheme peachpuff 
+colorscheme elflord 
 set number " displays line number
 
 "syntax enable
