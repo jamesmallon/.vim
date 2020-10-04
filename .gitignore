@@ -58,7 +58,13 @@ profile/autoload/*
 *test*
 
 # view files
-view
+view/
 
-# netrw files
+# netrw
 .netrwhist
+
+# backups
+.backups/
+
+# swap
+.swap/
