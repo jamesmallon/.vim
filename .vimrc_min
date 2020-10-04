@@ -124,7 +124,6 @@ function! UpsertIndenting()
         :call PHPFix()
     endif
 endfunction
-
 map <F8> :call UpsertIndenting()<CR>
 nmap <F8> :call UpsertIndenting()<CR>
 imap <F8> <Esc> :call UpsertIndenting()<CR>i
