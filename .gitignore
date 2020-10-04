@@ -68,3 +68,6 @@ view/
 
 # swap
 .swap/
+
+# netrw files
+.netrwhist
