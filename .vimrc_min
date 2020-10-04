@@ -15,48 +15,60 @@
 "augroup END
 "let g:netrw_winsize = 50 "restore default window split size
 
-colorscheme elflord 
-set number " displays line number
+"colorscheme elflord 
+colorscheme peachpuff
 
 "syntax enable
 syntax on
 filetype on
 filetype plugin indent on
 filetype indent on
-set sw=4
-"folding 
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+"autocmd Filetype c setlocal noexpandtab ts=4 sw=4 sts=4 "individual indentation rules 
+set sw=4 " sets the tab size of normal mode equals 4 spaces
+set ts=4 " sets the tab size equals 4 spaces
+set sts=4 " tabs are removed as tabs not as 4 spaces
+set autoindent " keeps the spaces and tabs from above lines 
+set smartindent " automatically indent lines inside of curly braces
 
-set shiftwidth=4 " sets the tab size equals 4 spaces
-set tabstop=4 " sets the tab size equals 4 spaces
+"folding 
+set fdm=manual "folding method to manual
+"set fdm=syntax "automatic folding based on the programming language syntax
+"set fdm=indent "automatic folding based in the indentation 
+autocmd BufWinLeave *.* mkview " make the view automatically
+autocmd BufWinEnter *.* silent loadview " load the views automatically
+
+"set shiftwidth=4 " sets the tab size of normal mode equals 4 spaces 
+"set tabstop=4 " sets the tab size equals 4 spaces
 set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L" " displays the filename and other specifications
 set fileencodings=utf-8 " sets the file charset
 set encoding=utf8
-set guifont=DroidSansMono\ Nerd\ Font\ 11
+"set guifont=DroidSansMono\ Nerd\ Font\ 11
 set incsearch " vim highlights you string search as you're typing it
-set autoindent " vim keeps the spaces and tabs of above lines while you're adding new lines (great for coding)
-set smartindent " vim automatically indent lines inside of curly braces
+"set list " show invisible characters
 set ruler " displays the cursor position all the time
-set showcmd " displays incomplete commands
+set showcmd " displays normal mode incomplete commands while you type
 set wildmenu " displays vim complete suggestions for system functions
-set scrolloff=5 " sets the lines remaining on top when using z command
+set scrolloff=5 " sets the remaining lines on bottom, bellow the cursor
+"set scrolloff=999 " makes the cursor always in the middle of the screen
 set hlsearch " highlights your searching matches
 "set ignorecase " disables case sensitive string searches (good to use with smartcase)
 "set smartcase " vim use case sensitive string searches if it detects any uppercase character
-set nobackup " disables backup files - vim will not create a copy of the file you're editing before you save it
 set autowrite
 set smarttab
 set linebreak
+"set listchars=tab:→\ ,eol:↲ "setting tab char to u2192 and eol char to u21b2 (Ctrl+v)
 set et
 set title
-set noswapfile "no swap files
-"set backupdir=backups/
+"set nobackup " disables backup files - vim will not create a copy of the file you're editing before you save it
+"set backupdir=./.backups
+set backupdir=~/.vim/.backups
+"set noswapfile "no swap files
+set dir=~/.vim/.swap "directory for the swap files
+"set dir=./.swap "directory for the swap files
 "set spell
 set autoread "enable file auto refresh
 set colorcolumn=85 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
-set nuw=4 "padding between nerdtree border and line number 
 "set mouse=a "enable mouse wheel scrolling
 set mouse=c "enable mouse selectin
 set history=5 " keep the last 5 commands in memory
@@ -64,14 +76,26 @@ set matchtime=2
 set matchpairs+=<:>
 set hidden "allow multiple edition in vim's buffer
 set backspace=indent,eol,start
+set nu " displays line number
+" toggle line number
+map <F2> :set nu! <CR>
+nmap <F2> :set nu! <CR>
+imap <F2> <Esc>:set nu! <CR>i
+vmap <F2> <Esc>:set nu! <CR>v
 
-" <F2> calls ToggleLineNumber
-function! ToggleLineNumber()
-    set number!
-endfunction
-:map <F2> :call ToggleLineNumber()<CR>
-:imap <F2> <Esc>:call ToggleLineNumber()<CR>a
-:vmap <F2> <Esc>:call ToggleLineNumber()<CR>a
+" toggle the relative line number
+map <F3> :set rnu! <CR>
+nmap <F3> :set rnu! <CR>
+imap <F3> <Esc>:set rnu! <CR>i
+vmap <F3> <Esc>:set rnu! <CR>v
+
+"fixing brain bugs
+abbr inlcude include
+abbr fucntion function
+abbr ruetnr return
+abbr return return
+abbr exapnd expand
+abbr Author Author: Thiago Mallon <thiagomallon@gmail.com>
 
 " Function to delete all unchanged buffers
 function! DeleteHiddenBuffers()
@@ -101,10 +125,46 @@ function! UpsertIndenting()
     endif
 endfunction
 
-:map <F3> :call UpsertIndenting()<CR>
-:nmap <F3> :call UpsertIndenting()<CR>
-:imap <F3> <Esc> :call UpsertIndenting()<CR>
-:vmap <F3> <Esc> :call UpsertIndenting()<CR>
+map <F8> :call UpsertIndenting()<CR>
+nmap <F8> :call UpsertIndenting()<CR>
+imap <F8> <Esc> :call UpsertIndenting()<CR>i
+vmap <F8> <Esc> :call UpsertIndenting()<CR>v
+
+" Build and run c script 
+function! CBuild()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        execute '!clear;  mkdir debug 2> /dev/null;  mkdir release 2> /dev/null;  gcc -g %:p -o debug/%:r;  gcc %:p -o release/%:r; printf "\33[1;32mDebug and Release successfully built for %:r.c\33[0m\n";'
+    endif
+endfunction
+
+" Build and run gdb 
+function! CBuildRunDebug()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        call CBuild()
+        execute '!clear; gdb -q debug/%:r;'
+    endif
+endfunction
+map <F4> <Esc> :call CBuildRunDebug()<CR>
+imap <F4> <Esc> :call CBuildRunDebug()<CR>
+vmap <F4> <Esc> :call CBuildRunDebug()<CR>
+noremap <F4> <Esc>:w<CR>:call CBuildRunDebug()<CR>
+
+" Build/run project with make
+function! CMake()
+    let extension = expand('%:e')
+    if extension == 'c'
+        write
+        execute '!clear; make; make clean;'
+    endif
+endfunction
+map <F6> <Esc> :call CMake()<CR>
+imap <F6> <Esc> :call CMake()<CR>
+vmap <F6> <Esc> :call CMake()<CR>
+noremap <F6> <Esc>:w<CR>:call CMake()<CR>
 
 " Run script 
 function! RunScript()
@@ -112,35 +172,12 @@ function! RunScript()
     if extension == 'py' || extension == 'sh'
         write
         execute '!clear;%:p'
+    elseif extension == 'c'
+        call CBuild()
+        execute '!clear; release/%:r;'
     endif
 endfunction
-:map <F5> <Esc>:w<CR>:call RunScript()<CR>
-:imap <F5> <Esc>:w<CR>:call RunScript()<CR>
-:vmap <F5> <Esc>:w<CR>:call RunScript()<CR>
-:noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
-
-" Build and run c script 
-function! CBuild()
-    let extension = expand('%:e')
-    if extension == 'c'
-        write
-        execute '!clear;gcc %:p -o %:r.o;'
-    endif
-endfunction
-:map <F4> <Esc>:w<CR>:call CBuild()<CR>
-:imap <F4> <Esc>:w<CR>:call CBuild()<CR>
-:vmap <F4> <Esc>:w<CR>:call CBuild()<CR>
-:noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
-
-" Build and run c script 
-function! CBuildRun()
-    let extension = expand('%:e')
-    if extension == 'c'
-        write
-        execute '!clear;gcc %:p -o %:r.o; ./%:r.o'
-    endif
-endfunction
-:map <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:imap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:vmap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
-:noremap <F7> <Esc>:w<CR>:call CBuildRun()<CR>
+map <F5> <Esc>:call RunScript()<CR>
+imap <F5> <Esc>:call RunScript()<CR>
+vmap <F5> <Esc>:call RunScript()<CR>
+noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
