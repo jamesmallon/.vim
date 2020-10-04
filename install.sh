@@ -5,6 +5,9 @@ LOG="./errors.log"
 
 exec 2>> >(tee -a "$LOG")
 
+vimView=~/.vim/view
+vimSwap=~/.vim/.swap
+vimBkps=~/.vim/.backups
 vimProf=~/.vim/profile
 vimBndl=~/.vim/profile/bundle
 vimAuto=~/.vim/profile/autoload
@@ -86,10 +89,13 @@ setup_env() {
 	# configure ~/.vimrc file
 	sh -c 'printf "set runtimepath^='$vimProf'\nruntime .vimrc" > ~/.vimrc'
 
+    # create .backups,.swap and view folders
+    mkdir $vimSwap $vimBkps $vimView
+
 	# get back to autoload folder
 	mkdir $vimAuto
 
-	# dowload pathogeni
+	# dowload pathogen
 	curl -LSso $vimAuto/pathogen.vim https://tpo.pe/pathogen.vim
 
 	# get back to bundle folder
