@@ -1,8 +1,5 @@
 " Author: Thiago Mallon <thiagomallon@gmail.com>
 
-"set runtimepath^=/home/gilbert/.vim/profile
-"runtime .vimrc
-
 "netrw configurations (nerdtree style)
 "let g:netrw_banner = 0 "disable banner ('s' still works for sorting content
 "let g:netrw_liststyle = 3 
@@ -67,7 +64,7 @@ set dir=~/.vim/.swap "directory for the swap files
 "set dir=./.swap "directory for the swap files
 "set spell
 set autoread "enable file auto refresh
-set colorcolumn=85 " set a right border to serv as a sign to the line max length"
+set colorcolumn=86 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 "set mouse=a "enable mouse wheel scrolling
 set mouse=c "enable mouse selectin
@@ -76,18 +73,6 @@ set matchtime=2
 set matchpairs+=<:>
 set hidden "allow multiple edition in vim's buffer
 set backspace=indent,eol,start
-set nu " displays line number
-" toggle line number
-map <F2> :set nu! <CR>
-nmap <F2> :set nu! <CR>
-imap <F2> <Esc>:set nu! <CR>i
-vmap <F2> <Esc>:set nu! <CR>v
-
-" toggle the relative line number
-map <F3> :set rnu! <CR>
-nmap <F3> :set rnu! <CR>
-imap <F3> <Esc>:set rnu! <CR>i
-vmap <F3> <Esc>:set rnu! <CR>v
 
 "fixing brain bugs
 abbr inlcude include
@@ -117,66 +102,66 @@ function! ReleaseTmpFolder(tempFolder, user)
     execute '!chown '.a:user.':'.a:user.' /tmp/'.a:tempFolder
 endfunction
 
-"
-function! UpsertIndenting()
-    let extension = expand('%:e')
-    if extension == 'php'
-        :call PHPFix()
-    endif
-endfunction
-map <F8> :call UpsertIndenting()<CR>
-nmap <F8> :call UpsertIndenting()<CR>
-imap <F8> <Esc> :call UpsertIndenting()<CR>i
-vmap <F8> <Esc> :call UpsertIndenting()<CR>v
+set nu " displays line number
+" toggle line number
+map <F2> :set nu! <CR>
+nmap <F2> :set nu! <CR>
+imap <F2> <Esc>:set nu! <CR>i
+vmap <F2> <Esc>:set nu! <CR>v
+
+" toggle the relative line number
+map  <leader><F2> :set rnu! <CR>
+nmap <leader><F2> :set rnu! <CR>
+imap <leader><F2> <Esc>:set rnu! <CR>i
+vmap <leader><F2> <Esc>:set rnu! <CR>v
+
+" Run make
+let mk = "!clear; make;"
+map <F3> :execute mk<CR>
+imap <F3> <Esc> :execute mk<CR>
+vmap <F3> <Esc> :execute mk<CR>
+"noremap <F3> <Esc>:w<CR> :execute mk<CR>
+" Run make clean
+let mkc = "!clear; make clean;"
+map  <leader><F3> :execute mkc<CR>
+imap <leader><F3> <Esc> :execute mkc<CR>
+vmap <leader><F3> <Esc> :execute mkc<CR>
+"noremap <F3> <Esc>:w<CR> :execute mkc<CR>
 
 " Build and run c script 
-function! CBuild()
-    let extension = expand('%:e')
-    if extension == 'c'
+function! CBuild(action)
+    if expand("%:e") == 'c'
         write
-        execute '!clear;  mkdir debug 2> /dev/null;  mkdir release 2> /dev/null;  gcc -g %:p -o debug/%:r;  gcc %:p -o release/%:r; printf "\33[1;32mDebug and Release successfully built for %:r.c\33[0m\n";'
+        let l:cmd = "!clear;"
+        let l:cmd .= "mkdir debug 2> /dev/null; gcc -Og -Wall -Werror -g %:p -o debug/%:r;"
+        let l:cmd .= "mkdir release 2> /dev/null; gcc -Wall -Werror %:p -o release/%:r;"
+        if a:action == "debug"
+            let l:cmd .= "gdb -q debug/%:r;"
+        elseif a:action == "release"
+            let l:cmd .= "release/%:r;"
+        endif
+        execute l:cmd
     endif
 endfunction
-
-" Build and run gdb 
-function! CBuildRunDebug()
-    let extension = expand('%:e')
-    if extension == 'c'
-        write
-        call CBuild()
-        execute '!clear; gdb -q debug/%:r;'
-    endif
-endfunction
-map <F4> <Esc> :call CBuildRunDebug()<CR>
-imap <F4> <Esc> :call CBuildRunDebug()<CR>
-vmap <F4> <Esc> :call CBuildRunDebug()<CR>
-noremap <F4> <Esc>:w<CR>:call CBuildRunDebug()<CR>
-
-" Build/run project with make
-function! CMake()
-    let extension = expand('%:e')
-    if extension == 'c'
-        write
-        execute '!clear; make; make clean;'
-    endif
-endfunction
-map <F6> <Esc> :call CMake()<CR>
-imap <F6> <Esc> :call CMake()<CR>
-vmap <F6> <Esc> :call CMake()<CR>
-noremap <F6> <Esc>:w<CR>:call CMake()<CR>
+map  <F4> :call CBuild("release")<CR>
+imap <F4> <Esc> :call CBuild("release")<CR>
+vmap <F4> <Esc> :call CBuild("release")<CR>
+map  <leader><F4> :call CBuild("debug")<CR>
+imap <leader><F4> <Esc> :call CBuild("debug")<CR>
+vmap <leader><F4> <Esc> :call CBuild("debug")<CR>
+"noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
 
 " Run script 
 function! RunScript()
-    let extension = expand('%:e')
-    if extension == 'py' || extension == 'sh'
+    let extension = expand("%:e")
+    if extension == 'py' || extension == "sh"
         write
-        execute '!clear;%:p'
+        execute "!clear;%:p"
     elseif extension == 'c'
-        call CBuild()
-        execute '!clear; release/%:r;'
+        call CBuild("release")
     endif
 endfunction
-map <F5> <Esc>:call RunScript()<CR>
-imap <F5> <Esc>:call RunScript()<CR>
-vmap <F5> <Esc>:call RunScript()<CR>
-noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
+map <F5> :call RunScript() <CR>
+imap <F5> <Esc> :call RunScript() <CR>
+vmap <F5> <Esc> :call RunScript() <CR>
+"noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
