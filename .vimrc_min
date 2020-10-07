@@ -77,8 +77,9 @@ set backspace=indent,eol,start
 "fixing brain bugs
 abbr inlcude include
 abbr fucntion function
+abbr func function
 abbr ruetnr return
-abbr return return
+abbr ret return
 abbr exapnd expand
 abbr Author Author: Thiago Mallon <thiagomallon@gmail.com>
 
@@ -128,27 +129,45 @@ imap <leader><F3> <Esc> :execute mkc<CR>
 vmap <leader><F3> <Esc> :execute mkc<CR>
 "noremap <F3> <Esc>:w<CR> :execute mkc<CR>
 
-" Build and run c script 
-function! CBuild(action)
+" function aux. to CBuild (local script-only)
+function! s:CheckCMode(mode) 
+    let l:opts = "-Wall" " if no mode, then only warnings
+    if a:mode ==? "hd" " insensitive
+        let l:opts .= " -Werror" " warnings as errors
+    elseif a:mode ==? "sft"
+        let l:opts = "" " not even warnings
+    endif
+    return l:opts
+endfunction
+
+" Build and run c scripts
+" first arg. action: 'rls'(release) or 'dbg'(debug)
+" second arg. mode: 'hd', 'sft' or '' 
+" third arg. libs: the lib(s) you want to use
+function! CBuild(action,...)
     if expand("%:e") == 'c'
         write
+        let l:opts = s:CheckCMode(get(a:, 1, ""))
+        let l:libs = get(a:, 2, "")
         let l:cmd = "!clear;"
-        let l:cmd .= "mkdir debug 2> /dev/null; gcc -Og -Wall -Werror -g %:p -o debug/%:r;"
-        let l:cmd .= "mkdir release 2> /dev/null; gcc -Wall -Werror %:p -o release/%:r;"
-        if a:action == "debug"
+        "let l:cmd .= "mkdir debug 2> /dev/null; gcc -Og -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
+        let l:cmd .= "mkdir debug 2> /dev/null; gcc -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
+        let l:cmd .= "mkdir release 2> /dev/null; gcc -O3 ".l:libs." ".l:opts." %:p -o release/%:r;"
+        if a:action == "dbg"
             let l:cmd .= "gdb -q debug/%:r;"
-        elseif a:action == "release"
+        elseif a:action == "rls"
             let l:cmd .= "release/%:r;"
         endif
+        "echom l:cmd
         execute l:cmd
     endif
 endfunction
-map  <F4> :call CBuild("release")<CR>
-imap <F4> <Esc> :call CBuild("release")<CR>
-vmap <F4> <Esc> :call CBuild("release")<CR>
-map  <leader><F4> :call CBuild("debug")<CR>
-imap <leader><F4> <Esc> :call CBuild("debug")<CR>
-vmap <leader><F4> <Esc> :call CBuild("debug")<CR>
+map  <F4> :call CBuild("rls","hd")<CR>
+imap <F4> <Esc> :call CBuild("rls","hd")<CR>
+vmap <F4> <Esc> :call CBuild("rls","hd")<CR>
+map  <leader><F4> :call CBuild("dbg","hd")<CR>
+imap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
+vmap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
 "noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
 
 " Run script 
@@ -158,10 +177,13 @@ function! RunScript()
         write
         execute "!clear;%:p"
     elseif extension == 'c'
-        call CBuild("release")
+        call CBuild("rls")
     endif
 endfunction
 map <F5> :call RunScript() <CR>
 imap <F5> <Esc> :call RunScript() <CR>
 vmap <F5> <Esc> :call RunScript() <CR>
+map <leader><F5> :call CBuild("dbg") <CR>
+imap <leader><F5> <Esc> :call CBuild("dbg") <CR>
+vmap <leader><F5> <Esc> :call CBuild("dbg") <CR>
 "noremap <F5> <Esc>:w<CR>:call RunScript()<CR>
