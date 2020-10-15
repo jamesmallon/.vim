@@ -144,22 +144,25 @@ endfunction
 " first arg. action: 'rls'(release) or 'dbg'(debug)
 " second arg. mode: 'hd', 'sft' or '' 
 " third arg. libs: the lib(s) you want to use
+" :call CBuild("","","-l pthread") 
+" :call CBuild("rls","","`pkg-config --cflags --libs gtk+-2.0`") 
+" or you can use a Makefile...
 function! CBuild(action,...)
     if expand("%:e") == 'c'
         write
         let l:opts = s:CheckCMode(get(a:, 1, ""))
         let l:libs = get(a:, 2, "")
-        let l:cmd = "!clear;"
-        "let l:cmd .= "mkdir debug 2> /dev/null; gcc -Og -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
-        let l:cmd .= "mkdir debug 2> /dev/null; gcc -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
-        let l:cmd .= "mkdir release 2> /dev/null; gcc -O3 ".l:libs." ".l:opts." %:p -o release/%:r;"
+        let l:clr = "!clear;"
+        let l:cmd = "mkdir %:p:h/debug %:p:h/release 2> /dev/null;"
+        let l:cmd .= "gcc -g ".l:libs." ".l:opts." %:p -o %:p:h/debug/%:t:r;"
+        let l:cmd .= "gcc -O3 ".l:libs." ".l:opts." %:p -o %:p:h/release/%:t:r;"
         if a:action == "dbg"
-            let l:cmd .= "gdb -q debug/%:r;"
+            let l:cmd .= "gdb -q %:p:h/debug/%:t:r;"
         elseif a:action == "rls"
-            let l:cmd .= "release/%:r;"
+            let l:cmd .= "%:p:h/release/%:t:r;"
         endif
-        "echom l:cmd
-        execute l:cmd
+        "execute l:clr."echo '".l:cmd."'"
+        execute l:clr.l:cmd
     endif
 endfunction
 map  <F4> :call CBuild("rls","hd")<CR>
@@ -172,16 +175,32 @@ vmap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
 
 " function to compile and run assembly (local script-only)
 function! s:AsmBuild()
-    let l:ext = expand("%:e")
-    if l:ext == 'asm' || l:ext == 's'
-        write
-        let l:comm = "!clear;"
-        let l:comm .= "nasm -felf64 %:p -o %:r.o;"
-        let l:comm .= "ld %:r.o -o %:r;"
-        let l:comm .= "./%:r"
-        execute l:comm
-    endif
+    write
+    let l:comm = "!clear;"
+    let l:comm .= "nasm -felf64 %:p -o %:r.o;"
+    let l:comm .= "ld %:r.o -o %:r;"
+    let l:comm .= "./%:r"
+    execute l:comm
 endfunction
+
+" Show the preprocessed or the disassembled code for the file being edited
+function! CheckCTemps(action,...)
+    write
+    let l:libs = get(a:, 1, "")
+    call CBuild("","",l:libs)
+    if a:action == 'i'
+        :e debug/%:r.i
+    elseif a:action == 's'
+        :e debug/%:r.s
+    endif
+    echom "Makefile?"
+endfunction
+map <F6> :call CheckCTemps('i')<CR>
+imap <F6> <Esc> :call CheckCTemps('i')<CR>
+vmap <F6> <Esc> :call CheckCTemps('i')<CR>
+map <leader><F6> :call CheckCTemps('s')<CR>
+imap <leader><F6> <Esc> :call CheckCTemps('s') <CR>
+vmap <leader><F6> <Esc> :call CheckCTemps('s') <CR>
 
 " Run script 
 function! RunScript()
@@ -191,7 +210,7 @@ function! RunScript()
         execute "!clear;%:p"
     elseif l:ext == 'c'
         call CBuild("rls")
-    elseif l:ext == 'asm'
+    elseif l:ext == 'asm' || l:ext == 's'
         call AsmBuild()
     endif
 endfunction
