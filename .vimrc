@@ -183,6 +183,25 @@ function! s:AsmBuild()
     execute l:comm
 endfunction
 
+" Show the preprocessed or the disassembled code for the file being edited
+function! CheckCTemps(action,...)
+    write
+    let l:libs = get(a:, 1, "")
+    call CBuild("","",l:libs)
+    if a:action == 'i'
+        :e debug/%:r.i
+    elseif a:action == 's'
+        :e debug/%:r.s
+    endif
+    echom "Makefile?"
+endfunction
+map <F6> :call CheckCTemps('i')<CR>
+imap <F6> <Esc> :call CheckCTemps('i')<CR>
+vmap <F6> <Esc> :call CheckCTemps('i')<CR>
+map <leader><F6> :call CheckCTemps('s')<CR>
+imap <leader><F6> <Esc> :call CheckCTemps('s') <CR>
+vmap <leader><F6> <Esc> :call CheckCTemps('s') <CR>
+
 " Run script 
 function! RunScript()
     let l:ext = expand("%:e")
