@@ -57,17 +57,19 @@ profile/autoload/*
 # test files
 *test*
 
-# view files
-view/
-
 # netrw
 .netrwhist
 
 # backups
-.backups/
+.backups/*
+!.backups/anchor
 
 # swap
-.swap/
+.swap/*
+!.swap/anchor
 
-# netrw files
-.netrwhist
+# view files
+view/*
+!view/anchor
+
+
