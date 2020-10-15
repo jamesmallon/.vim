@@ -1,5 +1,5 @@
-# Vim configured as IDE (for Red Hat, Debian, and Arch based distros)
-Red Hat, Fedora, CentOS, Debian, Trisquel, Ubuntu, Mint, Arch, Manjaro, etc it finds the right package manager.*
+# Vim configured as IDE (for Linux)
+Should run with not issues on rpm, apt and pacman based distros
 
 - customized color themes,                                                                                          
 - snippets                                                                                                          
