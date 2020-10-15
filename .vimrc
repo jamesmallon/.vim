@@ -185,15 +185,19 @@ endfunction
 
 " Show the preprocessed or the disassembled code for the file being edited
 function! CheckCTemps(action,...)
-    write
-    let l:libs = get(a:, 1, "")
-    call CBuild("","",l:libs)
-    if a:action == 'i'
-        :e debug/%:r.i
-    elseif a:action == 's'
-        :e debug/%:r.s
+    if expand("%:e") == 'c'
+        write
+        let l:libs = get(a:, 1, "")
+        "call CBuild("","",l:libs)
+        let l:part = "!clear; mkdir %:p:h/debug 2> /dev/null;"
+        if a:action == 'i'
+            execute l:part."gcc -E %:p -o %:p:h/debug/%:t:r.i;"
+            :e debug/%:r.i
+        elseif a:action == 's'
+            execute l:part."gcc -S %:p -o %:p:h/debug/%:t:r.s;"
+            :e debug/%:r.s
+        endif
     endif
-    echom "Makefile?"
 endfunction
 map <F6> :call CheckCTemps('i')<CR>
 imap <F6> <Esc> :call CheckCTemps('i')<CR>
