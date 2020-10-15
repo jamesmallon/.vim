@@ -135,68 +135,26 @@ nmap <leader><F2> :set rnu! <CR>
 imap <leader><F2> <Esc>:set rnu! <CR>i
 vmap <leader><F2> <Esc>:set rnu! <CR>v
 
-" Run make
-let mk = "!clear; make;"
-map <F3> :execute mk<CR>
-imap <F3> <Esc> :execute mk<CR>
-vmap <F3> <Esc> :execute mk<CR>
-"noremap <F3> <Esc>:w<CR> :execute mk<CR>
-" Run make clean
-let mkc = "!clear; make clean;"
-map  <leader><F3> :execute mkc<CR>
-imap <leader><F3> <Esc> :execute mkc<CR>
-vmap <leader><F3> <Esc> :execute mkc<CR>
-"noremap <F3> <Esc>:w<CR> :execute mkc<CR>
-
-" function aux. to CBuild (local script-only)
-function! s:CheckCMode(mode) 
-    let l:opts = "-Wall" " if no mode, then only warnings
-    if a:mode ==? "hd" " insensitive
-        let l:opts .= " -Werror" " warnings as errors
-    elseif a:mode ==? "sft"
-        let l:opts = "" " not even warnings
-    endif
-    return l:opts
+" function to compile and run assembly (local script-only)
+function! s:AsmBuild()
+    write
+    let l:comm = "!clear;"
+    let l:comm .= "nasm -felf64 %:p -o %:r.o;"
+    let l:comm .= "ld %:r.o -o %:r;"
+    let l:comm .= "./%:r"
+    execute l:comm
 endfunction
-
-" Build and run c scripts
-" first arg. action: 'rls'(release) or 'dbg'(debug)
-" second arg. mode: 'hd', 'sft' or '' 
-" third arg. libs: the lib(s) you want to use
-function! CBuild(action,...)
-    if expand("%:e") == 'c'
-        write
-        let l:opts = s:CheckCMode(get(a:, 1, ""))
-        let l:libs = get(a:, 2, "")
-        let l:cmd = "!clear;"
-        "let l:cmd .= "mkdir debug 2> /dev/null; gcc -Og -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
-        let l:cmd .= "mkdir debug 2> /dev/null; gcc -g ".l:libs." ".l:opts." %:p -o debug/%:r;"
-        let l:cmd .= "mkdir release 2> /dev/null; gcc -O3 ".l:libs." ".l:opts." %:p -o release/%:r;"
-        if a:action == "dbg"
-            let l:cmd .= "gdb -q debug/%:r;"
-        elseif a:action == "rls"
-            let l:cmd .= "release/%:r;"
-        endif
-        "echom l:cmd
-        execute l:cmd
-    endif
-endfunction
-map  <F4> :call CBuild("rls","hd")<CR>
-imap <F4> <Esc> :call CBuild("rls","hd")<CR>
-vmap <F4> <Esc> :call CBuild("rls","hd")<CR>
-map  <leader><F4> :call CBuild("dbg","hd")<CR>
-imap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
-vmap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
-"noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
 
 " Run script 
 function! RunScript()
-    let extension = expand("%:e")
-    if extension == 'py' || extension == "sh"
+    let l:ext = expand("%:e")
+    if l:ext == 'py' || l:ext == "sh"
         write
         execute "!clear;%:p"
-    elseif extension == 'c'
+    elseif l:ext == 'c'
         call CBuild("rls")
+    elseif l:ext == 'asm' || l:ext == 's'
+        call AsmBuild()
     endif
 endfunction
 map <F5> :call RunScript() <CR>
