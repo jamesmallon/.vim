@@ -170,14 +170,29 @@ imap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
 vmap <leader><F4> <Esc> :call CBuild("dbg","hd")<CR>
 "noremap <F4> <Esc>:w<CR>:call CBuild()<CR>
 
+" function to compile and run assembly (local script-only)
+function! s:AsmBuild()
+    let l:ext = expand("%:e")
+    if l:ext == 'asm' || l:ext == 's'
+        write
+        let l:comm = "!clear;"
+        let l:comm .= "nasm -felf64 %:p -o %:r.o;"
+        let l:comm .= "ld %:r.o -o %:r;"
+        let l:comm .= "./%:r"
+        execute l:comm
+    endif
+endfunction
+
 " Run script 
 function! RunScript()
-    let extension = expand("%:e")
-    if extension == 'py' || extension == "sh"
+    let l:ext = expand("%:e")
+    if l:ext == 'py' || l:ext == "sh"
         write
         execute "!clear;%:p"
-    elseif extension == 'c'
+    elseif l:ext == 'c'
         call CBuild("rls")
+    elseif l:ext == 'asm'
+        call AsmBuild()
     endif
 endfunction
 map <F5> :call RunScript() <CR>
