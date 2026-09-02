@@ -40,7 +40,7 @@ set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L" " displays
 set fileencodings=utf-8 " sets the file charset
 set encoding=utf8
 "set guifont=DroidSansMono\ Nerd\ Font\ 11
-set incsearch " vim highlights you string search as you're typing it
+set incsearch " vim highlights your string search as you're typing it
 "set list " show invisible characters
 set ruler " displays the cursor position all the time
 set showcmd " displays normal mode incomplete commands while you type
