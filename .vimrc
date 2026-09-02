@@ -1,7 +1,7 @@
 " Author: Thiago Mallon <thiagomallon@gmail.com>
 
 "netrw configurations (nerdtree style)
-"let g:netrw_banner = 0 "disable banner ('s' still works for sorting content
+"let g:netrw_banner = 0 "disable banner ('s' still works for sorting content)
 "let g:netrw_liststyle = 3 
 "let g:netrw_browse_split = 4
 "let g:netrw_altv = 1
@@ -45,7 +45,7 @@ set incsearch " vim highlights your string search as you're typing it
 set ruler " displays the cursor position all the time
 set showcmd " displays normal mode incomplete commands while you type
 set wildmenu " displays vim complete suggestions for system functions
-set scrolloff=5 " sets the remaining lines on bottom, bellow the cursor
+set scrolloff=5 " keeps five lines visible below the cursor
 "set scrolloff=999 " makes the cursor always in the middle of the screen
 set hlsearch " highlights your searching matches
 "set ignorecase " disables case sensitive string searches (good to use with smartcase)
@@ -67,11 +67,11 @@ set autoread "enable file auto refresh
 set colorcolumn=86 " set a right border to serv as a sign to the line max length"
 "%left 2 "padding between line number and text
 "set mouse=a "enable mouse wheel scrolling
-set mouse=c "enable mouse selectin
+set mouse=c "enable mouse selection
 set history=5 " keep the last 5 commands in memory
 set matchtime=2
 set matchpairs+=<:>
-set hidden "allow multiple edition in vim's buffer
+set hidden "allow editing multiple buffers
 set backspace=indent,eol,start
 
 "fixing brain bugs
